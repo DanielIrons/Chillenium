@@ -54,7 +54,7 @@ class Game
 		
 		this.trees = new Sprite(this.gl, "img/trees.png", vs, fs, {width: 768, height: 128});
 		this.trees_pos = new Point(-384, 0);
-		
+
 		this.hills = new Sprite(this.gl, "img/hills.png", vs, fs, {width: 768, height: 128});
 		this.hills_pos = new Point(-384, 0);
 		
@@ -89,6 +89,17 @@ class Game
 		this.scissor_minion_index.addSprite(4, 0.005); // move
 		this.scissor_minion_index.addSprite(1, 0.001); // idle
 		this.scissor_minion = new Scissor_Minion(this.scissor_minion_index, this.gl, vs, fs);
+
+		this.pebble_index = new SpriteIndex();
+		this.pebble_index.addSprite(4, 0.005); // move
+		this.pebble_index.addSprite(4, 0.003); // idle
+		this.pebble = new Pebble(this.pebble_index, this.gl, vs, fs);
+
+		this.boulder_index = new SpriteIndex();
+		this.boulder_index.addSprite(5, 0.006); // attack
+		this.boulder_index.addSprite(1, 0.001); // idle
+		this.boulder_index.addSprite(7, 0.01); // startup
+		this.boulder = new Boulder(this.boulder_index, this.gl, vs, fs);
 
 		this.character = 0;
 	}
@@ -198,6 +209,8 @@ class Game
 		}
 		
 		this.scissor_minion.update();
+		this.pebble.update();
+		this.boulder.update();
 		this.title.render(this.title_pos, this.bg_frames, 1);
 		this.grass.render(this.grass_pos, this.bg_frames, 1);
 
