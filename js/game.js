@@ -52,6 +52,9 @@ class Game
 		this.mount_pos = new Point(-64, 0);
 		this.bg_frames = new Point();
 		
+		this.trees = new Sprite(this.gl, "img/trees.png", vs, fs, {width: 768, height: 128});
+		this.trees_pos = new Point(-384, 0);
+		
 		this.hills = new Sprite(this.gl, "img/hills.png", vs, fs, {width: 768, height: 128});
 		this.hills_pos = new Point(-384, 0);
 		
@@ -96,6 +99,7 @@ class Game
 		if (num == 0)
 		{
 			this.mount_pos.x += 0.25;
+			this.trees_pos.x += 0.375;
 			this.hills_pos.x += 0.5;
 			this.grass_pos.x += 1;
 			this.title_pos.x += 1;
@@ -107,6 +111,10 @@ class Game
 			{
 				this.hills_pos.x -= 128;
 			}
+			if (this.trees_pos.x > 0)
+			{
+				this.trees_pos.x -= 128;
+			}
 			if (this.mount_pos.x > 0)
 			{
 				this.mount_pos.x -= 128;
@@ -116,6 +124,7 @@ class Game
 		if (num == 1)
 		{
 			this.mount_pos.x -= 0.25;
+			this.trees_pos.x -= 0.375;
 			this.hills_pos.x -= 0.5;
 			this.grass_pos.x -= 1;
 			this.title_pos.x -= 1;
@@ -126,6 +135,10 @@ class Game
 			if (this.hills_pos.x < -256)
 			{
 				this.hills_pos.x += 128;
+			}
+			if (this.trees_pos.x < -256)
+			{
+				this.trees_pos.x += 128;
 			}
 			if (this.mount_pos.x < -128)
 			{
@@ -149,6 +162,7 @@ class Game
 		if (Key.isDown(Key.RIGHT)) this.move(1);
 		
 		this.mountains.render(this.mount_pos, this.bg_frames, 1);
+		this.trees.render(this.trees_pos, this.bg_frames, 1);
 		this.hills.render(this.hills_pos, this.bg_frames, 1);
 		
 		
