@@ -52,11 +52,17 @@ class Game
 		this.mount_pos = new Point(-64, 0);
 		this.bg_frames = new Point();
 		
+		this.trees = new Sprite(this.gl, "img/trees.png", vs, fs, {width: 768, height: 128});
+		this.trees_pos = new Point(-384, 0);
+		
 		this.hills = new Sprite(this.gl, "img/hills.png", vs, fs, {width: 768, height: 128});
 		this.hills_pos = new Point(-384, 0);
 		
 		this.grass = new Sprite(this.gl, "img/grass.png", vs, fs, {width: 768, height: 128});
 		this.grass_pos = new Point(-384, 0);
+		
+		this.title = new Sprite(this.gl, "img/title.png", vs, fs, {width: 128, height: 128});
+		this.title_pos = new Point(50, 0);
 		
 		this.paper_index = new SpriteIndex();
 		this.paper_index.addSprite(12, 0.02); // move
@@ -93,8 +99,10 @@ class Game
 		if (num == 0)
 		{
 			this.mount_pos.x += 0.25;
+			this.trees_pos.x += 0.375;
 			this.hills_pos.x += 0.5;
 			this.grass_pos.x += 1;
+			this.title_pos.x += 1;
 			if (this.grass_pos.x > 0)
 			{
 				this.grass_pos.x -= 128;
@@ -102,6 +110,10 @@ class Game
 			if (this.hills_pos.x > 0)
 			{
 				this.hills_pos.x -= 128;
+			}
+			if (this.trees_pos.x > 0)
+			{
+				this.trees_pos.x -= 128;
 			}
 			if (this.mount_pos.x > 0)
 			{
@@ -112,8 +124,10 @@ class Game
 		if (num == 1)
 		{
 			this.mount_pos.x -= 0.25;
+			this.trees_pos.x -= 0.375;
 			this.hills_pos.x -= 0.5;
 			this.grass_pos.x -= 1;
+			this.title_pos.x -= 1;
 			if (this.grass_pos.x < -128)
 			{
 				this.grass_pos.x += 128;
@@ -121,6 +135,10 @@ class Game
 			if (this.hills_pos.x < -256)
 			{
 				this.hills_pos.x += 128;
+			}
+			if (this.trees_pos.x < -256)
+			{
+				this.trees_pos.x += 128;
 			}
 			if (this.mount_pos.x < -128)
 			{
@@ -144,6 +162,7 @@ class Game
 		if (Key.isDown(Key.RIGHT)) this.move(1);
 		
 		this.mountains.render(this.mount_pos, this.bg_frames, 1);
+		this.trees.render(this.trees_pos, this.bg_frames, 1);
 		this.hills.render(this.hills_pos, this.bg_frames, 1);
 		
 		
@@ -170,6 +189,7 @@ class Game
 			this.scissor_player.update();
 		}
 		
+		this.title.render(this.title_pos, this.bg_frames, 1);
 		this.grass.render(this.grass_pos, this.bg_frames, 1);
 
 		
