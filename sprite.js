@@ -1,10 +1,19 @@
+var SpriteIndex = {
+	construct: function() {
+		this.spriteFrameSpeed = new Array();
+	}
+	addSprite: function(frame, speed) {
+		this.spriteFrameSpeed.push([frame,speed]);
+	}
+}
+
 var Sprite = {
 	construct: function(gl, img, vs, fs, opts={}) {
 		this.gl = gl;
 		this.isLoaded = false;
 		//this.material = new Materials(gl,vs,fs);
 
-		this.size = Point(64, 64);
+		this.size = Point.construct(16, 16);
 
 		this.image = new Image();
 		this.image.src = img;
@@ -41,7 +50,16 @@ var Sprite = {
 
 		gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, image);
 
-		t
+		this.textureBuffer = gl.createBuffer();
+		gl.bindBuffer(gl.ARRAY_BUFFER, this.textureBuffer);
+		gl.bufferData(gl.ARRAY_BUFFER, Sprite.setRectangle(0, 0, this.image.width, this.image.height), gl.STATIC_DRAW);
+
+		this.geoBuffer = gl.createBuffer();
+		gl.bindBuffer(gl.ARRAY_BUFFER, this.geoBuffer);
+		gl.bufferData(gl.ARRAY_BUFFER, Sprite.setRectangle(0, 0, this.size.x, this.size.y), gl.STATIC_DRAW);
+		
+		gl.useProgram(null);
+		this.isLoaded = true;
 	},
 
 	createShader: function(gl, type, src) {
