@@ -35,8 +35,8 @@ class Game
 	constructor()
 	{
 		this.canvasElem = document.createElement("canvas");
-		this.canvasElem.width = 64;
-		this.canvasElem.height = 64;
+		this.canvasElem.width = 0;
+		this.canvasElem.height = 0;
 		
 		this.worldSpaceMatrix = new M3x3();
 		
@@ -48,8 +48,8 @@ class Game
 		let vs = document.getElementById("vs_01").innerHTML;
 		let fs = document.getElementById("fs_01").innerHTML;
 		
-		this.sky = new Sprite(this.gl, "img/sky.png", vs, fs, {width: 256, height: 128});
-		this.sky_pos = new Point(0, 0);
+		this.sky = new Sprite(this.gl, "img/sky.png", vs, fs, {width: 512, height: 128});
+		this.sky_pos = new Point(0, -60);
 		
 		this.mountains = new Sprite(this.gl, "img/mountains.png", vs, fs, {width: 768, height: 128});
 		this.mount_pos = new Point(-64, 0);
@@ -73,6 +73,9 @@ class Game
 		this.title_pos2 = new Point(50, 0);
 		this.title3 = new Sprite(this.gl, "img/title_dark.png", vs, fs, {width: 128, height: 128});
 		this.title_pos3 = new Point(50, 0);
+		
+		this.trans = new Sprite(this.gl, "img/between_trans.png", vs, fs, {wicth: 16, height: 16});
+		//this.trans_player = new Trans_Player(this.gl, this.trans, vs, fs);
 
 		this.paper_index = new SpriteIndex();
 		this.paper_index.addSprite(12, 0.02); // move
@@ -199,7 +202,7 @@ class Game
 	
 	update()
 	{
-		this.gl.viewport(0,-510, this.canvasElem.width * 1.5, this.canvasElem.height * 1.5); // scales and moves the canvas
+		this.gl.viewport(0, -545, this.canvasElem.width * 1.7, this.canvasElem.height * 1.7); // scales and moves the canvas
 		this.gl.clear(this.gl.COLOR_BUFFER_BIT); // bg color
 		
 		// allows transparency
@@ -209,6 +212,7 @@ class Game
 		if (Key.isDown(Key.LEFT)) this.move(0);
 		if (Key.isDown(Key.RIGHT)) this.move(1);
 		
+		this.sky.render(this.sky_pos, this.bg_frames, 1);
 		this.mountains.render(this.mount_pos, this.bg_frames, 1);
 		this.trees.render(this.trees_pos, this.bg_frames, 1);
 		this.hills.render(this.hills_pos, this.bg_frames, 1);
@@ -226,6 +230,7 @@ class Game
 		
 		if (this.character == 0)
 		{
+			
 			this.paper_player.update();
 		}
 		else if (this.character == 1)

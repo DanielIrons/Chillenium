@@ -44,6 +44,10 @@ class Scissor_Minion
 		{
 			this.curr = this.walk;
 			this.currNum = 0;
+			if (this.mirrored == 1)
+			{
+				this.pos.x += 10;
+			}
 			this.mirrored = -1;
 			this.pos.x-=.5;
 		}
@@ -51,6 +55,10 @@ class Scissor_Minion
 		{
 			this.curr = this.walk;
 			this.currNum = 0;
+			if (this.mirrored == -1)
+			{
+				this.pos.x -= 10;
+			}
 			this.mirrored = 1;
 			this.pos.x+=.5;
 		}
@@ -58,6 +66,7 @@ class Scissor_Minion
 	
 	render()
 	{	
+	
 		this.frame.x = ( new Date() * this.index.s_f_s[this.currNum][1]) % this.index.s_f_s[this.currNum][0];
 		this.curr.render(this.pos, this.frame, this.mirrored);
 	}
@@ -110,6 +119,11 @@ class Pebble
 		{
 			this.curr = this.walk;
 			this.currNum = 0;
+			if (this.mirrored == 1)
+			{
+				this.pos.x += 15;
+			}
+			this.mirrored = -1;
 			this.mirrored = -1;
 			this.pos.x-=.5;
 		}
@@ -117,6 +131,11 @@ class Pebble
 		{
 			this.curr = this.walk;
 			this.currNum = 0;
+			if (this.mirrored == -1)
+			{
+				this.pos.x -= 15;
+			}
+			this.mirrored = -1;
 			this.mirrored = 1;
 			this.pos.x+=.5;
 		}
