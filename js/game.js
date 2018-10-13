@@ -73,15 +73,13 @@ class Game
 		this.title_pos2 = new Point(50, 0);
 		this.title3 = new Sprite(this.gl, "img/title_dark.png", vs, fs, {width: 128, height: 128});
 		this.title_pos3 = new Point(50, 0);
-		
-		this.trans = new Sprite(this.gl, "img/between_trans.png", vs, fs, {wicth: 16, height: 16});
-		//this.trans_player = new Trans_Player(this.gl, this.trans, vs, fs);
 
 		this.paper_index = new SpriteIndex();
 		this.paper_index.addSprite(12, 0.02); // move
 		this.paper_index.addSprite(8, 0.005); // special
 		this.paper_index.addSprite(2, 0.003); // idle
 		this.paper_index.addSprite(9, 0.02); // attack
+		this.paper_index.addSprite(6, 0.02); // switch
 		this.paper_player = new Paper_Player(this.paper_index, this.gl, vs, fs);
 		
 		this.rock_index = new SpriteIndex();
@@ -89,6 +87,7 @@ class Game
 		this.rock_index.addSprite(4, 0.02); // special
 		this.rock_index.addSprite(2, 0.003); // idle
 		this.rock_index.addSprite(5, 0.02); // attack
+		this.rock_index.addSprite(6, 0.02); // switch
 		this.rock_player = new Rock_Player(this.rock_index, this.gl, vs, fs);
 		
 		this.scissor_index = new SpriteIndex();
@@ -96,6 +95,7 @@ class Game
 		this.scissor_index.addSprite(9, 0.02); // special
 		this.scissor_index.addSprite(4, 0.01); // idle
 		this.scissor_index.addSprite(3, 0.006); // attack
+		this.scissor_index.addSprite(6, 0.02); // switch
 		this.scissor_player = new Scissor_Player(this.scissor_index, this.gl, vs, fs);
 		
 		this.scissor_minion_index = new SpriteIndex();
@@ -219,18 +219,23 @@ class Game
 		this.grass_cont.render(this.grass_cont_pos, this.bg_frames, 1);
 		
 		if (Key.isDown(Key.J))
+		{
 			this.character = 0;
+		}
 		
 		if (Key.isDown(Key.K))
+		{
 			this.character = 1;
+		}
 		
 		if (Key.isDown(Key.L))
+		{
 			this.character = 2;
+		}
 		
 		
 		if (this.character == 0)
 		{
-			
 			this.paper_player.update();
 		}
 		else if (this.character == 1)

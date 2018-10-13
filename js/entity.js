@@ -11,7 +11,6 @@ class SpriteIndex
 	}
 }
 
-
 class Paper_Player
 {
 	constructor(index, gl, vs, fs)
@@ -32,6 +31,7 @@ class Paper_Player
 		this.special = new Sprite(gl, "img/paper_special.png", vs, fs, {width:16, height:16});
 		this.idle = new Sprite(gl, "img/paper_idle.png", vs, fs, {width:16, height:16});
 		this.attack = new Sprite(gl, "img/paper_attack.png", vs, fs, {width:16, height:16});
+		this.trans = new Sprite(gl, "img/between_trans.png", vs, fs, {width:16, height:16}); 
 		
 		this.curr = this.idle;
 		this.currNum = 2;
@@ -48,6 +48,11 @@ class Paper_Player
 		if (Key.isDown(Key.RIGHT)) this.movement(3);
 		if (Key.isDown(Key.P)) this.movement(4);
 		if (Key.isDown(Key.O)) this.movement(5);
+		if ((Key.isDown(Key.J)) || (Key.isDown(Key.K)) || (Key.isDown(Key.L)))
+		{
+			this.curr = this.trans;
+			this.currNum = 4;
+		}
 		
 		this.render();
 	}
@@ -133,6 +138,8 @@ class Scissor_Player
 		this.special = new Sprite(gl, "img/scissor_special.png", vs, fs, {width:16, height:16});
 		this.idle = new Sprite(gl, "img/scissor_idle.png", vs, fs, {width:16, height:16});
 		this.attack = new Sprite(gl, "img/scissor_attack.png", vs, fs, {width:16, height:16})
+		this.trans = new Sprite(gl, "img/between_trans.png", vs, fs, {width:16, height:16}); 
+
 		
 		this.curr = this.idle;
 		this.currNum = 2;
@@ -149,6 +156,11 @@ class Scissor_Player
 		if (Key.isDown(Key.RIGHT)) this.movement(3);
 		if (Key.isDown(Key.P)) this.movement(4);
 		if (Key.isDown(Key.O)) this.movement(5);
+		if ((Key.isDown(Key.J)) || (Key.isDown(Key.K)) || (Key.isDown(Key.L)))
+		{
+			this.curr = this.trans;
+			this.currNum = 4;
+		}
 		
 		this.render();
 	}
@@ -236,6 +248,8 @@ class Rock_Player
 		this.special = new Sprite(gl, "img/rock_special.png", vs, fs, {width:16, height:16});
 		this.idle = new Sprite(gl, "img/rock_idle.png", vs, fs, {width:16, height:16});
 		this.attack = new Sprite(gl, "img/rock_attack.png", vs, fs, {width:16, height:16});
+		this.trans = new Sprite(gl, "img/between_trans.png", vs, fs, {width:16, height:16});
+
 		
 		this.curr = this.idle;
 		this.currNum = 2;
@@ -252,7 +266,11 @@ class Rock_Player
 		if (Key.isDown(Key.RIGHT)) this.movement(3);
 		if (Key.isDown(Key.P)) this.movement(4);
 		if (Key.isDown(Key.O)) this.movement(5);
-
+		if ((Key.isDown(Key.J)) || (Key.isDown(Key.K)) || (Key.isDown(Key.L)))
+		{
+			this.curr = this.trans;
+			this.currNum = 4;
+		}
 		
 		if (this.pos.x >= 80)
 		{
