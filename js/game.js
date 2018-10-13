@@ -69,7 +69,7 @@ class Game
 
 		this.paper_index = new SpriteIndex();
 		this.paper_index.addSprite(12, 0.02); // move
-		this.paper_index.addSprite(); // special
+		this.paper_index.addSprite(8, 0.005); // special
 		this.paper_index.addSprite(2, 0.003); // idle
 		this.paper_index.addSprite(9, 0.02); // attack
 		this.paper_player = new Paper_Player(this.paper_index, this.gl, vs, fs);
