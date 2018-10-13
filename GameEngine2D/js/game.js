@@ -18,6 +18,10 @@ var Key = {
     return this._pressed[keyCode];
   },
   
+  isUp: function(keyCode) {
+	  return this._pressed[keyCode];
+  },
+  
   onKeydown: function(event) {
     this._pressed[event.keyCode] = true;
   },
@@ -67,6 +71,12 @@ class Game
 		this.rock_index.addSprite(2, 0.003); // idle
 		this.rock_player = new Rock_Player(this.rock_index, this.gl, vs, fs);
 		
+		this.scissor_index = new SpriteIndex();
+		this.scissor_index.addSprite(8, 0.01); // move
+		this.scissor_index.addSprite(9, 0.02); // special
+		this.scissor_index.addSprite(4, 0.01); // idle
+		this.scissor_player = new Scissor_Player(this.scissor_index, this.gl, vs, fs);
+		
 		this.character = 0;
 	}
 	
@@ -83,12 +93,12 @@ class Game
 	{
 		if (num == 0)
 		{
-			console.log(this.mount_pos.x);
-			this.mount_pos.x += 0.2;
-			this.hills_pos.x += 0.5;
-			this.grass_pos.x += 1;
-			if (this.grass_pos.x % 128 == 0)
+			this.mount_pos.x += 1;
+			this.hills_pos.x += 2;
+			this.grass_pos.x += 2;
+			if (this.grass_pos.x == -128)
 			{
+				console.log(this.grass_pos.x);
 				this.grass_pos.x -= 128;
 			}
 			if (this.hills_pos.x % 64 == 0)
@@ -103,10 +113,10 @@ class Game
 		}
 		if (num == 1)
 		{
-			this.mount_pos.x -= 0.25;
-			this.hills_pos.x -= 0.5;
-			this.grass_pos.x -= 1;
-			if (this.grass_pos.x % 64 == 0)
+			this.mount_pos.x -= 1;
+			this.hills_pos.x -= 2;
+			this.grass_pos.x -= 2;
+			if (this.grass_pos.x == 128)
 			{
 				this.grass_pos.x += 128;
 			}
@@ -141,14 +151,16 @@ class Game
 		
 		if (Key.isDown(Key.E))
 		{
-			this.character++;
-			console.log("character num = " + this.character);
-			
-			if (this.character >= 2)
+			if (Key.isUp(Key.E))
+			{
+				this.character++;
+			}
+			if (this.character >= 3)
 			{
 				this.character = 0;
 			}
 		}
+		
 		if (this.character == 0)
 		{
 			this.paper_player.update();
@@ -159,7 +171,7 @@ class Game
 		}
 		else if (this.character == 2)
 		{
-			// scissor update
+			this.scissor_player.update();
 		}
 		
 		this.grass.render(this.grass_pos, this.bg_frames, 1);
