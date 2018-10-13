@@ -25,7 +25,7 @@ class Paper_Player
 		this.dt = 1/60;
 		this.mirrored = 1;
 		this.isGrounded = true;
-
+		this.weight = 0.9;
 		
 		this.walk = new Sprite(gl, "img/paper_move.png", vs, fs, {width:16, height:16});
 		this.attack = new Sprite(gl, "img/paper_special.png", vs, fs, {width:16, height:16});
@@ -52,9 +52,9 @@ class Paper_Player
 	
 	movement(num)
 	{
-		if (num == 0) //move up
+		if (num == 0 && this.pos.y == 80) //move up
 		{
-			//this.pos.y -= 1;
+			this.acc.y = -15*(1/this.weight)
 		}
 		if (num == 1) // move down	
 		{
@@ -82,11 +82,18 @@ class Paper_Player
 	render()
 	{
 		this.vel.y += this.acc.y * this.dt;
-		this.pos.y += this.vel.y * this.dt;
-		
+		this.pos.y += this.vel.y;
+		this.acc.y+= this.weight;
+		if (this.acc.y >0 && this.vel.y > this.weight){
+			this.vel.y = this.weight;
+		}
 		if (this.pos.y >= 80)
 		{
 			this.pos.y = 80;
+		}
+		
+		if (this.acc.y >0 && this.pos.y >= 80){
+		this.acc.y = 0;
 		}
 		
 		if (this.mirrored == -1)
@@ -112,7 +119,7 @@ class Scissor_Player
 		this.dt = 1/60;
 		this.mirrored = 1;
 		this.isGrounded = true;
-
+		this.weight = 1.2;
 		
 		this.walk = new Sprite(gl, "img/scissor_move.png", vs, fs, {width:16, height:16});
 		this.attack = new Sprite(gl, "img/scissor_special.png", vs, fs, {width:16, height:16});
@@ -139,9 +146,9 @@ class Scissor_Player
 	
 	movement(num)
 	{
-		if (num == 0) //move up
+		if (num == 0 && this.pos.y == 80) //move up
 		{
-			//this.pos.y -= 1;
+			this.acc.y = -15*(1/this.weight)
 		}
 		if (num == 1) // move down	
 		{
@@ -169,11 +176,16 @@ class Scissor_Player
 	render()
 	{
 		this.vel.y += this.acc.y * this.dt;
-		this.pos.y += this.vel.y * this.dt;
+		this.pos.y += this.vel.y;
+		this.acc.y+= this.weight;
 		
 		if (this.pos.y >= 80)
 		{
 			this.pos.y = 80;
+		}
+		
+		if (this.acc.y >0 && this.pos.y >= 80){
+		this.acc.y = 0;
 		}
 		
 		if (this.mirrored == -1)
@@ -199,7 +211,7 @@ class Rock_Player
 		this.dt = 1/60;
 		this.mirrored = 1;
 		this.isGrounded = true;
-
+		this.weight = 1.8;
 		
 		this.walk = new Sprite(gl, "img/rock_move.png", vs, fs, {width:16, height:16});
 		this.attack = new Sprite(gl, "img/rock_special.png", vs, fs, {width:16, height:16});
@@ -231,10 +243,9 @@ class Rock_Player
 	
 	movement(num)
 	{
-		if (num == 0) //move up
+		if (num == 0 && this.pos.y == 80) //move up
 		{
-			this.vel.y += 0.2 * this.dt;
-			this.pos.y -= this.vel.y * this.dt;
+			this.acc.y = -15*(1/this.weight);
 		}
 		if (num == 1) // move down	
 		{
@@ -257,16 +268,23 @@ class Rock_Player
 			this.curr = this.attack;
 			this.currNum = 1;
 		}
+
+
 	}
 	
 	render()
 	{
 		this.vel.y += this.acc.y * this.dt;
-		this.pos.y += this.vel.y * this.dt;
-		
+		this.pos.y += this.vel.y;
+		this.acc.y+= this.weight;
+
 		if (this.pos.y >= 80)
 		{
 			this.pos.y = 80;
+		}
+		
+		if (this.acc.y >0 && this.pos.y >= 80){
+		this.acc.y = 0;
 		}
 		
 		if (this.mirrored == -1)
