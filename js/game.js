@@ -66,6 +66,10 @@ class Game
 		
 		this.title = new Sprite(this.gl, "img/title.png", vs, fs, {width: 128, height: 128});
 		this.title_pos = new Point(50, 0);
+		this.title2 = new Sprite(this.gl, "img/title_dark.png", vs, fs, {width: 128, height: 128});
+		this.title_pos2 = new Point(50, 0);
+		this.title3 = new Sprite(this.gl, "img/title_dark.png", vs, fs, {width: 128, height: 128});
+		this.title_pos3 = new Point(50, 0);
 
 		this.paper_index = new SpriteIndex();
 		this.paper_index.addSprite(12, 0.02); // move
@@ -125,6 +129,8 @@ class Game
 			this.hills_pos.x += 0.5;
 			this.grass_pos.x += 1;
 			this.grass_cont_pos.x += 1;
+			this.title_pos3.x += 0.96;
+			this.title_pos2.x += 0.98;
 			this.title_pos.x += 1;
 			if (this.grass_pos.x > 0)
 			{
@@ -151,6 +157,8 @@ class Game
 			this.hills_pos.x -= 0.5;
 			this.grass_pos.x -= 1;
 			this.grass_cont_pos.x -= 1;
+			this.title_pos3.x -= 0.96;
+			this.title_pos2.x -= 0.98;
 			this.title_pos.x -= 1;
 			if (this.grass_pos.x < -128)
 			{
@@ -216,6 +224,8 @@ class Game
 		this.scissor_minion.update();
 		this.pebble.update();
 		this.boulder.update();
+		this.title3.render(this.title_pos3, this.bg_frames, 1);
+		this.title2.render(this.title_pos2, this.bg_frames, 1);
 		this.title.render(this.title_pos, this.bg_frames, 1);
 		this.grass.render(this.grass_pos, this.bg_frames, 1);
 
