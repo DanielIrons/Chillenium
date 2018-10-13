@@ -13,6 +13,9 @@ var Key = {
   DOWN: 40,
   Q: 81,
   E: 69,
+  J: 74,
+  K: 75,
+  L: 76,
   
   isDown: function(keyCode) {
     return this._pressed[keyCode];
@@ -140,20 +143,19 @@ class Game
 		if (Key.isDown(Key.LEFT)) this.move(0);
 		if (Key.isDown(Key.RIGHT)) this.move(1);
 		
-		
-		
 		this.mountains.render(this.mount_pos, this.bg_frames, 1);
 		this.hills.render(this.hills_pos, this.bg_frames, 1);
 		
-		if (Key.isDown(Key.E))
-		{
-			this.character++;
-			
-			if (this.character >= 3)
-			{
-				this.character = 0;
-			}
-		}
+		
+		if (Key.isDown(Key.J))
+			this.character = 0;
+		
+		if (Key.isDown(Key.K))
+			this.character = 1;
+		
+		if (Key.isDown(Key.L))
+			this.character = 2;
+		
 		
 		if (this.character == 0)
 		{
