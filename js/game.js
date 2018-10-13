@@ -48,6 +48,9 @@ class Game
 		let vs = document.getElementById("vs_01").innerHTML;
 		let fs = document.getElementById("fs_01").innerHTML;
 		
+		this.sky = new Sprite(this.gl, "img/sky.png", vs, fs, {width: 256, height: 128});
+		this.sky_pos = new Point(0, 0);
+		
 		this.mountains = new Sprite(this.gl, "img/mountains.png", vs, fs, {width: 768, height: 128});
 		this.mount_pos = new Point(-64, 0);
 		this.bg_frames = new Point();
@@ -132,6 +135,7 @@ class Game
 			this.title_pos3.x += 0.96;
 			this.title_pos2.x += 0.98;
 			this.title_pos.x += 1;
+			
 			if (this.grass_pos.x > 0)
 			{
 				this.grass_pos.x -= 128;
