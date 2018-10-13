@@ -18,10 +18,6 @@ var Key = {
     return this._pressed[keyCode];
   },
   
-  isUp: function(keyCode) {
-	  return this._pressed[keyCode];
-  },
-  
   onKeydown: function(event) {
     this._pressed[event.keyCode] = true;
   },
@@ -151,10 +147,8 @@ class Game
 		
 		if (Key.isDown(Key.E))
 		{
-			if (Key.isUp(Key.E))
-			{
-				this.character++;
-			}
+			this.character++;
+			
 			if (this.character >= 3)
 			{
 				this.character = 0;
