@@ -32,8 +32,9 @@
 			if(count == 0) {
 				clearInterval(calmInterval);
 			}
-		}, (duration*1000) - delay[Math.floor(Math.random() * 6)]);
+		}, (duration*1000) - delay[Math.floor(Math.random() * delay.length)]);
 	}
+	pfwo();
 </script>
 </body>
 </html>
