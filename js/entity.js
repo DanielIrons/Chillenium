@@ -56,7 +56,7 @@ class Paper_Player
 	{
 		if (num == 0 && this.pos.y == 80) //move up
 		{
-			this.acc.y = -12*(1/this.weight)
+			this.acc.y = -13*(1/this.weight)
 		}
 		if (num == 1) // move down	
 		{
@@ -91,8 +91,8 @@ class Paper_Player
 		this.vel.y += this.acc.y * this.dt;
 		this.pos.y += this.vel.y;
 		this.acc.y+= this.weight;
-		if (this.acc.y >0 && this.vel.y > this.weight){
-			this.vel.y = this.weight;
+		if (this.acc.y >0 && this.vel.y > this.weight*(1/20)){//fallspeed
+			this.vel.y = this.weight*(1/20);
 		}
 		if (this.pos.y >= 80)
 		{
@@ -157,7 +157,7 @@ class Scissor_Player
 	{
 		if (num == 0 && this.pos.y == 80) //move up
 		{
-			this.acc.y = -15*(1/this.weight);
+			this.acc.y = -17*(1/this.weight);
 		}
 		if (num == 1) // move down	
 		{
@@ -193,6 +193,10 @@ class Scissor_Player
 		this.pos.y += this.vel.y;
 		this.acc.y+= this.weight;
 		
+		if (this.acc.y >0 && this.vel.y > this.weight){
+			this.vel.y = this.weight;
+		}
+
 		if (this.pos.y >= 80)
 		{
 			this.pos.y = 80;
@@ -261,7 +265,7 @@ class Rock_Player
 	{
 		if (num == 0 && this.pos.y == 80) //move up
 		{
-			this.acc.y = -15*(1/this.weight);
+			this.acc.y = -30*(1/this.weight);
 		}
 		if (num == 1) // move down	
 		{
