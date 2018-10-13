@@ -93,19 +93,18 @@ class Game
 	{
 		if (num == 0)
 		{
-			this.mount_pos.x += 1;
-			this.hills_pos.x += 2;
-			this.grass_pos.x += 2;
-			if (this.grass_pos.x == -128)
+			this.mount_pos.x += 0.25;
+			this.hills_pos.x += 0.5;
+			this.grass_pos.x += 1;
+			if (this.grass_pos.x > 128)
 			{
-				console.log(this.grass_pos.x);
 				this.grass_pos.x -= 128;
 			}
-			if (this.hills_pos.x % 64 == 0)
+			if (this.hills_pos.x > 128)
 			{
 				this.hills_pos.x -= 128;
 			}
-			if (this.mount_pos.x % 26 == 0)
+			if (this.mount_pos.x > 128)
 			{
 				this.mount_pos.x -= 128;
 			}
@@ -113,23 +112,24 @@ class Game
 		}
 		if (num == 1)
 		{
-			this.mount_pos.x -= 1;
-			this.hills_pos.x -= 2;
-			this.grass_pos.x -= 2;
-			if (this.grass_pos.x == 128)
+			this.mount_pos.x -= 0.25;
+			this.hills_pos.x -= 0.5;
+			this.grass_pos.x -= 1;
+			if (this.grass_pos.x < -128)
 			{
 				this.grass_pos.x += 128;
 			}
-			if (this.hills_pos.x % 64 == 0)
+			if (this.hills_pos.x < -256)
 			{
 				this.hills_pos.x += 128;
 			}
-			if (this.mount_pos.x % 64 == 0)
+			if (this.mount_pos.x < -128)
 			{
 				this.mount_pos.x += 128;
 			}
 
 		}
+	
 	}
 	
 	update()
