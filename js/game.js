@@ -58,6 +58,9 @@ class Game
 		this.hills = new Sprite(this.gl, "img/hills.png", vs, fs, {width: 768, height: 128});
 		this.hills_pos = new Point(-384, 0);
 		
+		this.grass_cont = new Sprite(this.gl, "img/grass_controlles.png", vs, fs, {width: 256, height: 128});
+		this.grass_cont_pos = new Point(-250, -23);
+		
 		this.grass = new Sprite(this.gl, "img/grass.png", vs, fs, {width: 768, height: 128});
 		this.grass_pos = new Point(-384, 0);
 		
@@ -121,6 +124,7 @@ class Game
 			this.trees_pos.x += 0.375;
 			this.hills_pos.x += 0.5;
 			this.grass_pos.x += 1;
+			this.grass_cont_pos.x += 1;
 			this.title_pos.x += 1;
 			if (this.grass_pos.x > 0)
 			{
@@ -146,6 +150,7 @@ class Game
 			this.trees_pos.x -= 0.375;
 			this.hills_pos.x -= 0.5;
 			this.grass_pos.x -= 1;
+			this.grass_cont_pos.x -= 1;
 			this.title_pos.x -= 1;
 			if (this.grass_pos.x < -128)
 			{
@@ -183,7 +188,7 @@ class Game
 		this.mountains.render(this.mount_pos, this.bg_frames, 1);
 		this.trees.render(this.trees_pos, this.bg_frames, 1);
 		this.hills.render(this.hills_pos, this.bg_frames, 1);
-		
+		this.grass_cont.render(this.grass_cont_pos, this.bg_frames, 1);
 		
 		if (Key.isDown(Key.J))
 			this.character = 0;
