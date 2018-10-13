@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+
+<script>
+	
+	function play(duration, hrtz, type) {
+		var context = new AudioContext();
+		const oscillator = context.createOscillator();
+		oscillator.type = type;
+		oscillator.frequency.setValueAtTime(hrtz, context.currentTime);
+		const gainNode = context.createGain();
+		oscillator.connect(gainNode);
+		gainNode.connect(context.destination);
+		oscillator.start(0);
+		gainNode.gain.linearRampToValueAtTime(0.0001, context.currentTime + duration);
+		oscillator.stop(context.currentTime + duration);
+	}
+	function pfwo(frequencies = [100, 200, 300], type = 'sine', inOrder = false, delay = [500]) {	
+		const duration = 2;
+		var hertzVal = frequencies,
+			delay = delay,
+			count = hertzVal.length;
+		var calmInterval = setInterval(function() {
+			var math = inOrder ? hertzVal.length - 1 : Math.floor(Math.random() * count);
+			play(duration, hertzVal[math], type);
+			hertzVal.splice(math, 1);
+			count--;
+			if(count == 0) {
+				clearInterval(calmInterval);
+			}
+		}, (duration*1000) - delay[Math.floor(Math.random() * 6)]);
+	}
+</script>
+</body>
+</html>
