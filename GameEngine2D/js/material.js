@@ -209,7 +209,8 @@ class Sprite
 			let frame_x = Math.floor(frames.x) * this.uv_x;
 			let frame_y = Math.floor(frames.y) * this.uv_y;
 			
-
+			//console.log(" rendering ... \n" );
+			
 			let obj_mat = new M3x3().transition(position.x, position.y).scale(mirrored, 1);
 			
 			gl.useProgram(this.material.program);
