@@ -45,7 +45,7 @@ class Game
 		let vs = document.getElementById("vs_01").innerHTML;
 		let fs = document.getElementById("fs_01").innerHTML;
 		
-		this.mountains = new Sprite(this.gl, "img/mountains.png", vs, fs, {width: 384, height: 128});
+		this.mountains = new Sprite(this.gl, "img/mountains.png", vs, fs, {width: 768, height: 128});
 		this.mount_pos = new Point(-64, 0);
 		this.bg_frames = new Point();
 		
@@ -92,15 +92,15 @@ class Game
 			this.mount_pos.x += 0.25;
 			this.hills_pos.x += 0.5;
 			this.grass_pos.x += 1;
-			if (this.grass_pos.x > 128)
+			if (this.grass_pos.x > 0)
 			{
 				this.grass_pos.x -= 128;
 			}
-			if (this.hills_pos.x > 128)
+			if (this.hills_pos.x > 0)
 			{
 				this.hills_pos.x -= 128;
 			}
-			if (this.mount_pos.x > 128)
+			if (this.mount_pos.x > 0)
 			{
 				this.mount_pos.x -= 128;
 			}
