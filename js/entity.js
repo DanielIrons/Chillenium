@@ -26,11 +26,12 @@ class Paper_Player
 		this.mirrored = 1;
 		this.isGrounded = true;
 		this.weight = 0.9;
+
 		
 		this.walk = new Sprite(gl, "img/paper_move.png", vs, fs, {width:16, height:16});
-		this.attack = new Sprite(gl, "img/paper_special.png", vs, fs, {width:16, height:16});
+		this.special = new Sprite(gl, "img/paper_special.png", vs, fs, {width:16, height:16});
 		this.idle = new Sprite(gl, "img/paper_idle.png", vs, fs, {width:16, height:16});
-
+		this.attack = new Sprite(gl, "img/paper_attack.png", vs, fs, {width:16, height:16});
 		
 		this.curr = this.idle;
 		this.currNum = 2;
@@ -45,7 +46,8 @@ class Paper_Player
 		if (Key.isDown(Key.DOWN)) this.movement(1);
 		if (Key.isDown(Key.LEFT)) this.movement(2);
 		if (Key.isDown(Key.RIGHT)) this.movement(3);
-		if (Key.isDown(Key.Q)) this.movement(4);
+		if (Key.isDown(Key.P)) this.movement(4);
+		if (Key.isDown(Key.O)) this.movement(5);
 		
 		this.render();
 	}
@@ -54,7 +56,7 @@ class Paper_Player
 	{
 		if (num == 0 && this.pos.y == 80) //move up
 		{
-			this.acc.y = -15*(1/this.weight)
+			this.acc.y = -12*(1/this.weight)
 		}
 		if (num == 1) // move down	
 		{
@@ -72,10 +74,15 @@ class Paper_Player
 			this.currNum = 0;
 			this.mirrored = 1;
 		}
-		if (num == 4) // attack
+		if (num == 4) // special
+		{
+			this.curr = this.special;
+			this.currNum = 1;
+		}
+		if (num == 5)
 		{
 			this.curr = this.attack;
-			this.currNum = 1;
+			this.currNum = 3;
 		}
 	}
 	
@@ -120,11 +127,12 @@ class Scissor_Player
 		this.mirrored = 1;
 		this.isGrounded = true;
 		this.weight = 1.2;
+
 		
 		this.walk = new Sprite(gl, "img/scissor_move.png", vs, fs, {width:16, height:16});
-		this.attack = new Sprite(gl, "img/scissor_special.png", vs, fs, {width:16, height:16});
+		this.special = new Sprite(gl, "img/scissor_special.png", vs, fs, {width:16, height:16});
 		this.idle = new Sprite(gl, "img/scissor_idle.png", vs, fs, {width:16, height:16});
-		
+		this.attack = new Sprite(gl, "img/scissor_attack.png", vs, fs, {width:16, height:16})
 		
 		this.curr = this.idle;
 		this.currNum = 2;
@@ -139,7 +147,8 @@ class Scissor_Player
 		if (Key.isDown(Key.DOWN)) this.movement(1);
 		if (Key.isDown(Key.LEFT)) this.movement(2);
 		if (Key.isDown(Key.RIGHT)) this.movement(3);
-		if (Key.isDown(Key.Q)) this.movement(4);
+		if (Key.isDown(Key.P)) this.movement(4);
+		if (Key.isDown(Key.O)) this.movement(5);
 		
 		this.render();
 	}
@@ -148,7 +157,7 @@ class Scissor_Player
 	{
 		if (num == 0 && this.pos.y == 80) //move up
 		{
-			this.acc.y = -15*(1/this.weight)
+			this.acc.y = -15*(1/this.weight);
 		}
 		if (num == 1) // move down	
 		{
@@ -166,10 +175,15 @@ class Scissor_Player
 			this.currNum = 0;
 			this.mirrored = 1;
 		}
-		if (num == 4) // attack
+		if (num == 4) // special
+		{
+			this.curr = this.special;
+			this.currNum = 1;
+		}
+		if(num == 5) // attack
 		{
 			this.curr = this.attack;
-			this.currNum = 1;
+			this.currNum = 3
 		}
 	}
 	
@@ -212,11 +226,12 @@ class Rock_Player
 		this.mirrored = 1;
 		this.isGrounded = true;
 		this.weight = 1.8;
+
 		
 		this.walk = new Sprite(gl, "img/rock_move.png", vs, fs, {width:16, height:16});
-		this.attack = new Sprite(gl, "img/rock_special.png", vs, fs, {width:16, height:16});
+		this.special = new Sprite(gl, "img/rock_special.png", vs, fs, {width:16, height:16});
 		this.idle = new Sprite(gl, "img/rock_idle.png", vs, fs, {width:16, height:16});
-
+		this.attack = new Sprite(gl, "img/rock_attack.png", vs, fs, {width:16, height:16});
 		
 		this.curr = this.idle;
 		this.currNum = 2;
@@ -231,7 +246,8 @@ class Rock_Player
 		if (Key.isDown(Key.DOWN)) this.movement(1);
 		if (Key.isDown(Key.LEFT)) this.movement(2);
 		if (Key.isDown(Key.RIGHT)) this.movement(3);
-		if (Key.isDown(Key.Q)) this.movement(4);
+		if (Key.isDown(Key.P)) this.movement(4);
+		if (Key.isDown(Key.O)) this.movement(5);
 
 		
 		if (this.pos.x >= 80)
@@ -263,13 +279,16 @@ class Rock_Player
 			this.currNum = 0;
 			this.mirrored = 1;
 		}
-		if (num == 4) // attack
+		if (num == 4) // special
 		{
-			this.curr = this.attack;
+			this.curr = this.special;
 			this.currNum = 1;
 		}
-
-
+		if (num == 5)
+		{
+			this.curr = this.attack;
+			this.currNum = 3;
+		}
 	}
 	
 	render()

@@ -7,12 +7,12 @@ function loop()
 var Key = {
   _pressed: {},
 
-  LEFT: 37,
-  UP: 38,
-  RIGHT: 39,
-  DOWN: 40,
-  Q: 81,
-  E: 69,
+  LEFT: 65,
+  UP: 87,
+  RIGHT: 68,
+  DOWN: 83,
+  O: 79,
+  P: 80,
   J: 74,
   K: 75,
   L: 76,
@@ -63,25 +63,33 @@ class Game
 		
 		this.title = new Sprite(this.gl, "img/title.png", vs, fs, {width: 128, height: 128});
 		this.title_pos = new Point(50, 0);
-		
+
 		this.paper_index = new SpriteIndex();
 		this.paper_index.addSprite(12, 0.02); // move
-		this.paper_index.addSprite(9, 0.02); // special
+		this.paper_index.addSprite(); // special
 		this.paper_index.addSprite(2, 0.003); // idle
+		this.paper_index.addSprite(9, 0.02); // attack
 		this.paper_player = new Paper_Player(this.paper_index, this.gl, vs, fs);
 		
 		this.rock_index = new SpriteIndex();
 		this.rock_index.addSprite(4, 0.008); // move
 		this.rock_index.addSprite(4, 0.02); // special
 		this.rock_index.addSprite(2, 0.003); // idle
+		this.rock_index.addSprite(5, 0.02); // attack
 		this.rock_player = new Rock_Player(this.rock_index, this.gl, vs, fs);
 		
 		this.scissor_index = new SpriteIndex();
 		this.scissor_index.addSprite(8, 0.01); // move
 		this.scissor_index.addSprite(9, 0.02); // special
 		this.scissor_index.addSprite(4, 0.01); // idle
+		this.scissor_index.addSprite(3, 0.006); // attack
 		this.scissor_player = new Scissor_Player(this.scissor_index, this.gl, vs, fs);
 		
+		this.scissor_minion_index = new SpriteIndex();
+		this.scissor_minion_index.addSprite(4, 0.005); // move
+		this.scissor_minion_index.addSprite(1, 0.001); // idle
+		this.scissor_minion = new Scissor_Minion(this.scissor_minion_index, this.gl, vs, fs);
+
 		this.character = 0;
 	}
 	
@@ -189,6 +197,7 @@ class Game
 			this.scissor_player.update();
 		}
 		
+		this.scissor_minion.update();
 		this.title.render(this.title_pos, this.bg_frames, 1);
 		this.grass.render(this.grass_pos, this.bg_frames, 1);
 
