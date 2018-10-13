@@ -107,14 +107,26 @@ class Game
 	
 	move(num)
 	{
+		if (this.character == 0){
+		this.backSpeed = 1;
+		}
+		if (this.character == 1){
+		this.backSpeed = 0.6;
+		}
+		if (this.character == 2){
+		this.backSpeed = 1.35;
+		}
+		
+		
+
 		if (num == 0)
 		{
-			this.mount_pos.x += 0.25;
-			this.trees_pos.x += 0.375;
-			this.hills_pos.x += 0.5;
-			this.grass_pos.x += 1;
-			this.grass_cont_pos.x += 1;
-			this.title_pos.x += 1;
+			this.mount_pos.x += 0.25*this.backSpeed;
+			this.trees_pos.x += 0.375*this.backSpeed;
+			this.hills_pos.x += 0.5*this.backSpeed;
+			this.grass_pos.x += 1*this.backSpeed;
+			this.grass_cont_pos.x += 1*this.backSpeed;
+			this.title_pos.x += 1*this.backSpeed;
 			if (this.grass_pos.x > 0)
 			{
 				this.grass_pos.x -= 128;
@@ -135,12 +147,12 @@ class Game
 		}
 		if (num == 1)
 		{
-			this.mount_pos.x -= 0.25;
-			this.trees_pos.x -= 0.375;
-			this.hills_pos.x -= 0.5;
-			this.grass_pos.x -= 1;
-			this.grass_cont_pos.x -= 1;
-			this.title_pos.x -= 1;
+			this.mount_pos.x -= 0.25*this.backSpeed;
+			this.trees_pos.x -= 0.375*this.backSpeed;
+			this.hills_pos.x -= 0.5*this.backSpeed;
+			this.grass_pos.x -= 1*this.backSpeed;
+			this.grass_cont_pos.x -= 1*this.backSpeed;
+			this.title_pos.x -= 1*this.backSpeed;
 			if (this.grass_pos.x < -128)
 			{
 				this.grass_pos.x += 128;
