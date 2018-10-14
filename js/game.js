@@ -301,11 +301,11 @@ class Game
 		}
 		
 
-		if ((Key.isDown(Key.O)) || (Key.isDown(Key.P)))
+		if (Key.isDown(Key.P))
 		{
 			if (this.character == 0) // paper
 			{
-				this.PaperAttackBoxes.check_collisions(this.enemyList, this.mirrored);
+
 			}
 			else if (this.character == 1) // rock
 			{
@@ -316,6 +316,22 @@ class Game
 				this.ScissorAttackBoxes.check_collisions(this.enemyList, this.mirrored);
 			}
 		}
+		if (Key.isDown(Key.O))
+		{
+			if (this.character == 0)
+			{
+				this.PaperAttackBoxes.check_collisions(this.enemyList, this.mirrored);
+				if (this.mirrored == false)
+				{
+					this.move(1);
+				}
+				else 
+				{
+					this.move(0);
+				}
+			}
+		}
+		
 		
 		if (this.character == 0)
 		{
