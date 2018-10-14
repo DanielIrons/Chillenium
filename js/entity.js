@@ -25,6 +25,9 @@ class Paper_Player
 		this.mirrored = 1;
 		this.isGrounded = true;
 		this.weight = 0.9;
+
+		this.hp = 5;
+
 		this.attackboxes = attackboxes;
 		this.hitbox = hitbox;
 
@@ -137,8 +140,12 @@ class Scissor_Player
 		this.mirrored = 1;
 		this.isGrounded = true;
 		this.weight = 1.2;
+
+		this.hp = 5;
+
 		this.attackboxes = attackboxes;
 		this.hitbox = hitbox;
+
 		
 		this.walk = new Sprite(gl, "img/scissor_move.png", vs, fs, {width:16, height:16});
 		this.special = new Sprite(gl, "img/scissor_special.png", vs, fs, {width:16, height:16});
@@ -251,8 +258,11 @@ class Rock_Player
 		this.mirrored = 1;
 		this.isGrounded = true;
 		this.weight = 1.8;
+		this.hp = 5;
+
 		this.attackboxes = attackboxes;
 		this.hitbox = hitbox;
+
 		
 		this.walk = new Sprite(gl, "img/rock_move.png", vs, fs, {width:16, height:16});
 		this.special = new Sprite(gl, "img/rock_special.png", vs, fs, {width:16, height:16});

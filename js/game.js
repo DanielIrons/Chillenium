@@ -276,18 +276,25 @@ class Game
 			this.paper_player.update();
 			this.rock_player.pos.y = this.paper_player.pos.y;
 			this.scissor_player.pos.y = this.paper_player.pos.y;
+			this.rock_player.hp = this.paper_player.hp;
+			this.scissor_player.hp = this.paper_player.hp;
+
 		}
 		else if (this.character == 1)
 		{
 			this.rock_player.update();
 			this.scissor_player.pos.y = this.rock_player.pos.y;
-			this.paper_player.pos.y = this.rock_player.pos.y
+			this.paper_player.pos.y = this.rock_player.pos.y;
+			this.scissor_player.hp = this.rock_player.hp;
+			this.paper_player.hp = this.rock_player.hp;
 		}
 		else if (this.character == 2)
 		{
 			this.scissor_player.update();
 			this.rock_player.pos.y = this.scissor_player.pos.y;
 			this.paper_player.pos.y = this.scissor_player.pos.y;
+			this.rock_player.hp = this.scissor_player.hp;
+			this.paper_player.hp = this.scissor_player.hp;
 		}
 		
 		
