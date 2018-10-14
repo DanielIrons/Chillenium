@@ -75,6 +75,9 @@ class Game
 		this.title3 = new Sprite(this.gl, "img/title_dark.png", vs, fs, {width: 128, height: 128});
 		this.title_pos3 = new Point(50, 0);
 		
+		this.pew = new Sprite(this.gl, "img/small_death.png", vs, fs, {width: 16, height: 16});
+		this.pew_pos = new Point();
+		this.pew_frames = new Point(4,0);
 		
 		this.box = new Sprite (this.gl, "img/blankBox.png", vs, fs, {width: 6, height: 10});
 		this.coords = new Point(105, 83);
@@ -101,7 +104,7 @@ class Game
 		this.rock_index.addSprite(4, 0.008); // move
 		this.rock_index.addSprite(4, 0.02); // special
 		this.rock_index.addSprite(2, 0.003); // idle
-		this.rock_index.addSprite(5, 0.02); // attack
+		this.rock_index.addSprite(5, 0.009); // attack
 		this.rock_index.addSprite(6, 0.02); // switch
 		this.rock_player = new Rock_Player(this.rock_index, this.gl, vs, fs, this.RockAttackBoxes, this.RockHitBox);
 		
@@ -116,26 +119,29 @@ class Game
 		this.scissor_minion_index = new SpriteIndex();
 		this.scissor_minion_index.addSprite(4, 0.005); // move
 		this.scissor_minion_index.addSprite(1, 0.001); // idle
+		this.scissor_minion_index.addSprite(4, 0.01); // death
 		this.scissor_minion = new Scissor_Minion(this.scissor_minion_index, this.gl, vs, fs);
 		
 		this.pebble_index = new SpriteIndex();
 		this.pebble_index.addSprite(4, 0.005); // move
 		this.pebble_index.addSprite(4, 0.003); // idle
+		this.pebble_index.addSprite(4, 0.01); // death
 		this.pebble = new Pebble(this.pebble_index, this.gl, vs, fs);
 		
 		this.boulder_index = new SpriteIndex();
 		this.boulder_index.addSprite(5, 0.006); // attack
 		this.boulder_index.addSprite(1, 0.001); // idle
 		this.boulder_index.addSprite(7, 0.01); // startup
+		this.boulder_index.addSprite(4, 0.01); // death
 		this.boulder = new Boulder(this.boulder_index, this.gl, vs, fs);
 
-		
 		this.plane_index = new SpriteIndex();
 		this.plane_index.addSprite(2, 0.002);
 		this.plane_index.addSprite(1, 0.001);
+		this.plane_index.addSprite(4, 0.01); // death
 		this.plane = new Plane(this.plane_index, this.gl, vs, fs);
 		
-
+		
 		
 		//index list of current enemies in the scene:
 		this.enemyList = [
@@ -146,6 +152,7 @@ class Game
 
 		this.character = 0;
 		this.mirrored = false;
+		this.buffer = false;
 	}
 	
 	resize(x,y)
@@ -185,6 +192,8 @@ class Game
 			this.title_pos2.x += 0.98*this.backSpeed;
 			if(this.planeLand == 1){
 				this.plane.pos.x += 1*this.backSpeed;
+				this.plane.hitbox.x += 1*this.backSpeed;
+				this.plane.health_pos.x += this.backSpeed;
 			}
 
 			if (this.grass_pos.x > 0)
@@ -224,6 +233,9 @@ class Game
 					this.plane.pos.x = 280;
 					this.plane.pos.y = 15;
 				}
+				this.plane.hitbox.x -= this.backSpeed;
+				this.plane.health_pos.x -= this.backSpeed;
+				
 			}
 
 			if (this.grass_pos.x < -128)
@@ -310,18 +322,26 @@ class Game
 			}
 			else if (this.character == 1) // rock
 			{
-				this.RockAttackBoxes.check_collisions(this.enemyList, this.mirrored);
+				
 			}
 			else if (this.character == 2) // scissor
 			{
-				this.ScissorAttackBoxes.check_collisions(this.enemyList, this.mirrored);
+			
 			}
 		}
 		if (Key.isDown(Key.O))
 		{
-			if (this.character == 0)
+			if (this.character == 0) // paper
 			{
-				this.PaperAttackBoxes.check_collisions(this.enemyList, this.mirrored);
+				if (this.buffer == false)
+				{
+					console.log(this.buffer);
+					this.buffer = this.PaperAttackBoxes.check_collisions(this.enemyList, this.mirrored);
+					if (this.buffer == true)
+						setTimeout(this.buffer = false, 1000);
+				}
+	
+				
 				if (this.mirrored == false)
 				{
 					this.move(1);
@@ -330,6 +350,14 @@ class Game
 				{
 					this.move(0);
 				}
+			}
+			else if (this.character == 1) // rock
+			{
+				this.RockAttackBoxes.check_collisions(this.enemyList, this.mirrored);
+			}
+			else if (this.character == 2) // scissor
+			{
+				this.ScissorAttackBoxes.check_collisions(this.enemyList, this.mirrored);
 			}
 		}
 		
