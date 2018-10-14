@@ -33,6 +33,7 @@ var Key = {
 		//index list of current enemies in the scene:
 var enemyList = [];
 var valuesCheck = [];
+var gRight = 0;
 
 class Game
 {
@@ -42,7 +43,6 @@ class Game
 		this.canvasElem = document.createElement("canvas");
 		this.canvasElem.width = 0;
 		this.canvasElem.height = 0;
-		this.planeLand = 0;
 		this.right = 0;
 		this.worldSpaceMatrix = new M3x3();
 		
@@ -144,7 +144,7 @@ class Game
 		this.plane_index.addSprite(2, 0.002);
 		this.plane_index.addSprite(1, 0.001);
 		this.plane_index.addSprite(4, 0.01); // death
-		this.plane = new Plane(this.plane_index, this.gl, this.vs, this.fs);
+		
 		
 		
 
@@ -206,11 +206,6 @@ class Game
 			this.title_pos3.x += 0.96*this.backSpeed;
 			this.title_pos2.x += 0.98*this.backSpeed;
 			
-			if(this.planeLand == 1){
-				this.plane.pos.x += 1*this.backSpeed;
-				this.plane.hitbox.x += 1*this.backSpeed;
-			}
-			
 			if (this.grass_pos.x > 0)
 			{
 				this.grass_pos.x -= 128;
@@ -227,7 +222,8 @@ class Game
 			{
 				this.mount_pos.x -= 128;
 			}
-			
+			this.right --;
+			gRight = this.right;
 		}
 		if (num == 1)//Left
 		{
@@ -242,16 +238,6 @@ class Game
 			this.title_pos3.x -= 0.96*this.backSpeed;
 			this.title_pos2.x -= 0.98*this.backSpeed;
 			
-			if(this.planeLand == 1)
-			{
-				this.plane.pos.x -= 1*this.backSpeed;
-				if (this.plane.pos.x < -16){
-					this.plane.pos.x = 280;
-					this.plane.pos.y = 15;
-				}
-				this.plane.hitbox.x -= this.backSpeed;
-				
-			}
 			if (this.grass_pos.x < -128)
 			{
 				this.grass_pos.x += 128;
@@ -269,7 +255,7 @@ class Game
 				this.mount_pos.x += 128;
 			}
 			this.right++;
-			
+			gRight = this.right;
 			enemyList.forEach(function(element) {
 				if(element.pos.x > 127) {
 					element.pos.x -= 1;
@@ -282,8 +268,9 @@ class Game
 	
 	update()
 	{
+		var right = this.right;
 		enemyList.forEach(function(element) {
-			if(element.isAlive == false)
+			if(element.isAlive == false || (right-element.pos.x) > 384)
 			{
 				enemyList.splice(enemyList.indexOf(element), 1);
 			}
@@ -305,12 +292,6 @@ class Game
 		// allows transparency
 		this.gl.enable(this.gl.BLEND);
 		this.gl.blendFunc(this.gl.SRC_ALPHA, this.gl.ONE_MINUS_SRC_ALPHA); 
-	
-	
-		if(this.plane.update())
-		{
-			this.planeLand = 1;
-		}
 		
 		
 		if (Key.isDown(Key.LEFT)) this.move(0);
@@ -321,7 +302,6 @@ class Game
 		this.trees.render(this.trees_pos, this.bg_frames, 1);
 		this.hills.render(this.hills_pos, this.bg_frames, 1);
 		this.grass_cont.render(this.grass_cont_pos, this.bg_frames, 1);
-		// var b=this.plane.update();
 		
 		
 		
@@ -416,8 +396,6 @@ class Game
 		this.title.render(this.title_pos, this.bg_frames, 1);
 		this.grass.render(this.grass_pos, this.bg_frames, 1);
 				
-		this.plane.render();
-		
 		this.player_health_bar.render(this.bar_pos, this.bar_frame, 1);
 		this.gl.flush();
 	}
