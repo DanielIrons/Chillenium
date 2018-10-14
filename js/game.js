@@ -281,7 +281,7 @@ class Game
 	{
 		var right = this.right;
 		enemyList.forEach(function(element) {
-			if(element.isAlive == false || (right-element.pos.x) > 384)
+			if(element.isAlive == false)
 			{
 				enemyList.splice(enemyList.indexOf(element), 1);
 			}
@@ -331,48 +331,6 @@ class Game
 			this.character = 2;
 		}
 		
-
-		if (Key.isDown(Key.P))
-		{
-			if (this.character == 0) // paper
-			{
-
-			}
-			else if (this.character == 1) // rock
-			{
-				this.RockAttackBoxes.check_collisions(enemyList, this.mirrored);
-			}
-			else if (this.character == 2) // scissor
-			{
-			
-			}
-		}
-		if (Key.isDown(Key.O))
-		{
-			if (this.character == 0) // paper
-			{
-				this.PaperAttackBoxes.check_collisions(enemyList, this.mirrored);
-			
-
-				if (this.mirrored == false)
-				{
-					this.move(1);
-				}
-				else 
-				{
-					this.move(0);
-				}
-			}
-			else if (this.character == 1) // rock
-			{
-				
-			}
-			else if (this.character == 2) // scissor
-			{
-				this.ScissorAttackBoxes.check_collisions(enemyList, this.mirrored);
-			}
-		}
-		
 		// collisions
 		for(var i = 0; i < enemyList.length; i++)
 		{
@@ -401,7 +359,53 @@ class Game
 				{
 					// deal damage to enemy...
 					//console.log("collision detected! ... \n");
-					this.bar_frame.y++;
+					if (this.character == 0) // paper
+					{
+						
+						if (enemyList[i].isPaper)
+						{
+							this.bar_frame.y--;
+						}
+						else if (enemyList[i].isRock)
+						{
+							enemyList[i].deal_damage(3);
+						}
+						else if (eneymyList[i].isScissor)
+						{
+							this.bar_frame.y--;
+						}
+					}
+					else if (this.character == 1) // rock
+					{
+						if (enemyList[i].isPaper)
+						{
+							this.bar_frame.y--;
+						}
+						else if (enemyList[i].isRock)
+						{
+							this.bar_frame.y--;
+						}
+						else if (enemyList[i].isScissor)
+						{
+							enemyList[i].deal_damage(3);
+						}
+					}
+					else if (this.character == 2) // scissor
+					{
+						if (enemyList[i].isPaper)
+						{
+							enemyList[i].deal_damage(3);
+						}
+						else if (enemyList[i].isRock)
+						{
+							this.bar_frame.y--;
+						}
+						else if (eneymyList[i].isScissor)
+						{
+							this.bar_frame.y--;
+						}
+					}
+					
 				}
 			}
 		}	
@@ -436,6 +440,7 @@ class Game
 		enemyList.forEach(function(element) {
 			element.update()
 		});
+		
 		this.title3.render(this.title_pos3, this.bg_frames, 1);
 		this.title2.render(this.title_pos2, this.bg_frames, 1);
 		this.title.render(this.title_pos, this.bg_frames, 1);

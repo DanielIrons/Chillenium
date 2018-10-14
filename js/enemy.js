@@ -10,6 +10,10 @@ class Scissor_Minion
 		this.isGone = false;
 		this.count = 0;
 		
+		this.isPaper = false;
+		this.isRock = false;
+		this.isScissor = true;
+		
 		this.walk = new Sprite(gl, "img/scissor_minion_move.png", vs, fs, {width:8, height:8});
 		this.idle = new Sprite(gl, "img/scissor_minion_idle.png", vs, fs, {width:8, height:8});
 		this.pew = new Sprite(gl, "img/small_death.png", vs, fs, {width: 16, height: 16});
@@ -133,6 +137,10 @@ class Plane
 		this.isGone = false;
 		this.count = 0;
 		
+		this.isPaper = true;
+		this.isRock = false;
+		this.isScissor = false;
+		
 		this.walk = new Sprite(gl, "img/plane_move.png", vs, fs, {width:8, height:8});
 		this.idle = new Sprite(gl, "img/plane_idle.png", vs, fs, {width:8, height:8});
 		this.pew = new Sprite(gl, "img/small_death.png", vs, fs, {width: 16, height: 16});
@@ -255,6 +263,10 @@ class Pebble
 		this.isAlive = true;
 		this.isGone = false;
 		this.count = 0;
+		
+		this.isPaper = false;
+		this.isRock = true;
+		this.isScissor = false;
 		
 		this.walk = new Sprite(gl, "img/pebble_move.png", vs, fs, {width:16, height:16});
 		this.idle = new Sprite(gl, "img/pebble_move.png", vs, fs, {width:16, height:16});
