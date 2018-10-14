@@ -1,10 +1,10 @@
 
 class Scissor_Minion
 {
-	constructor(index, gl, vs, fs)
+	constructor(index, gl, vs, fs, xVal)
 	{
 		this.index = index;
-		this.pos = new Point(130, 83);
+		this.pos = new Point(xVal, 83);
 		this.frame = new Point();
 		this.isAlive = true;
 		this.isGone = false;
@@ -259,10 +259,10 @@ class Plane{
 
 class Pebble
 {
-	constructor(index, gl, vs, fs)
+	constructor(index, gl, vs, fs, xVal)
 	{
 		this.index = index;
-		this.pos = new Point(140, 78);
+		this.pos = new Point(xVal, 78);
 		this.frame = new Point();
 		this.isAlive = true;
 		this.isGone = false;
@@ -385,7 +385,7 @@ class Pebble
 
 class Boulder
 {
-	constructor(index, gl, vs, fs)
+	constructor(index, gl, vs, fs, xVal)
 	{
 		this.index = index;
 		this.pos = new Point(485, 80);

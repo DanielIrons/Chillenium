@@ -45,13 +45,13 @@ class PlayerAttackCircs
 				if (mirrored == false)
 				{
 					this.Circ1 = this.RightCirc;
-					console.log(this.Circ1);
+
 				}
 				else 
 				{
 					this.Circ1 = this.LeftCirc;
 					this.Circ1 = this.RightCirc;
-					console.log(this.Circ1);
+
 				}
 				this.Circ2 = enemyList[i].hitbox.hitbox;
 				
