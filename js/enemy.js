@@ -65,7 +65,6 @@ class Scissor_Minion
 	
 	deal_damage(points)
 	{
-		console.log("hit!");
 		this.health_frame.y += points;
 		if (this.health_frame.y >= 10)
 		{
@@ -195,7 +194,6 @@ class Plane{
 	
 	deal_damage(points)
 	{
-		console.log("hit!");
 		this.health_frame.y += points;
 		if (this.health_frame.y >= 10)
 		{
@@ -326,7 +324,6 @@ class Pebble
 	
 	deal_damage(points)
 	{
-		console.log("hit!");
 		this.health_frame.y += points;
 		if (this.health_frame.y >= 10)
 		{
@@ -456,7 +453,6 @@ class Boulder
 	
 	deal_damage(points)
 	{
-		console.log("hit!");
 		this.health_frame.y += points;
 		if (this.health_frame.y >= 10)
 		{

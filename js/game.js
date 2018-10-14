@@ -140,7 +140,7 @@ class Game
 		this.plane_index.addSprite(2, 0.002);
 		this.plane_index.addSprite(1, 0.001);
 		this.plane_index.addSprite(4, 0.01); // death
-		// this.plane = new Plane(this.plane_index, this.gl, this.vs, this.fs);
+		this.plane = new Plane(this.plane_index, this.gl, this.vs, this.fs);
 		
 		
 
@@ -193,13 +193,13 @@ class Game
 			this.title_pos.x += 1*this.backSpeed;
 			this.title_pos3.x += 0.96*this.backSpeed;
 			this.title_pos2.x += 0.98*this.backSpeed;
-			/*
+			
 			if(this.planeLand == 1){
 				this.plane.pos.x += 1*this.backSpeed;
 				this.plane.hitbox.x += 1*this.backSpeed;
 				this.plane.health_pos.x += this.backSpeed;
 			}
-			*/
+			
 			if (this.grass_pos.x > 0)
 			{
 				this.grass_pos.x -= 128;
@@ -230,7 +230,7 @@ class Game
 			this.title_pos.x -= 1*this.backSpeed;
 			this.title_pos3.x -= 0.96*this.backSpeed;
 			this.title_pos2.x -= 0.98*this.backSpeed;
-			/*
+			
 			if(this.planeLand == 1){
 
 				this.plane.pos.x -= 1*this.backSpeed;
@@ -242,7 +242,7 @@ class Game
 				this.plane.health_pos.x -= this.backSpeed;
 				
 			}
-			*/
+			
 			if (this.grass_pos.x < -128)
 			{
 				this.grass_pos.x += 128;
@@ -274,7 +274,6 @@ class Game
 	update()
 	{
 		
-		
 		if (this.character == 0){
 		this.backSpeed = 1;
 		}
@@ -292,12 +291,12 @@ class Game
 		this.gl.enable(this.gl.BLEND);
 		this.gl.blendFunc(this.gl.SRC_ALPHA, this.gl.ONE_MINUS_SRC_ALPHA); 
 	
-		/*
+	
 		if(this.plane.update())
 		{
 			this.planeLand = 1;
 		}
-		*/
+		
 		
 		if (Key.isDown(Key.LEFT)) this.move(0);
 		if (Key.isDown(Key.RIGHT)) this.move(1);
@@ -402,7 +401,7 @@ class Game
 		this.title.render(this.title_pos, this.bg_frames, 1);
 		this.grass.render(this.grass_pos, this.bg_frames, 1);
 				
-
+		this.plane.render();
 		
 		this.gl.flush();
 	}
