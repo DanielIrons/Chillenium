@@ -9,6 +9,7 @@ class Scissor_Minion
 		
 		this.walk = new Sprite(gl, "img/scissor_minion_move.png", vs, fs, {width:8, height:8});
 		this.idle = new Sprite(gl, "img/scissor_minion_idle.png", vs, fs, {width:8, height:8});
+		this.hitbox = new HitBox(this.pos.x, this.pos.y, 8, 8);
 		
 		this.curr = this.idle;
 		this.currNum = 1;
@@ -31,7 +32,7 @@ class Scissor_Minion
 		} else {
 			this.movement(0);
 		}
-
+				
 		this.render();
 	}
 	
@@ -62,6 +63,8 @@ class Scissor_Minion
 			this.mirrored = 1;
 			this.pos.x+=.5;
 		}
+		
+		this.hitbox.translate(this.pos.x, this.pos.y);
 	}
 	
 	render()
@@ -83,6 +86,7 @@ class Pebble
 		
 		this.walk = new Sprite(gl, "img/pebble_move.png", vs, fs, {width:16, height:16});
 		this.idle = new Sprite(gl, "img/pebble_move.png", vs, fs, {width:16, height:16});
+		this.hitbox = new HitBox(this.pos.x, this.pos.y, 16, 16);
 		
 		this.curr = this.idle;
 		this.currNum = 1;
@@ -106,7 +110,7 @@ class Pebble
 		} else {
 			this.movement(0);
 		}
-
+		
 		this.render();
 	}
 	
@@ -139,6 +143,7 @@ class Pebble
 			this.mirrored = 1;
 			this.pos.x+=.5;
 		}
+		this.hitbox.translate(this.pos.x, this.pos.y);
 	}
 	
 	render()
@@ -159,7 +164,7 @@ class Boulder
 		
 		this.attack = new Sprite(gl, "img/boulder_attack.png", vs, fs, {width:16, height:16});
 		this.idle = new Sprite(gl, "img/boulder_idle.png", vs, fs, {width:16, height:16});
-		// this.startup = new Sprite(gl, "img/boulder_notMove.png", vs, fs, {width:16, height:16});
+		this.hitbox = new HitBox(this.pos.x, this.pos.y, 16, 16);
 
 		this.curr = this.idle;
 		this.currNum = 1;
@@ -208,6 +213,7 @@ class Boulder
 			this.mirrored = 1;
 			this.pos.x++;
 		}
+		this.hitbox.translate(this.pos.x, this.pos.y);
 	}
 	
 	render()
