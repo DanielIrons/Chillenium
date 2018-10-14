@@ -121,20 +121,26 @@ class Game
 		this.pebble_index.addSprite(4, 0.005); // move
 		this.pebble_index.addSprite(4, 0.003); // idle
 		this.pebble = new Pebble(this.pebble_index, this.gl, vs, fs);
-		/*
+		
 		this.boulder_index = new SpriteIndex();
 		this.boulder_index.addSprite(5, 0.006); // attack
 		this.boulder_index.addSprite(1, 0.001); // idle
 		this.boulder_index.addSprite(7, 0.01); // startup
 		this.boulder = new Boulder(this.boulder_index, this.gl, vs, fs);
-		*/
+
+
+		this.plane_index = new SpriteIndex();
+		this.plane_index.addSprite(2, 0.002);
+		this.plane = new Plane(this.plane_index, this.gl, vs, fs);
+
+
 		
 		//index list of current enemies in the scene:
 		this.enemyList = [
 			this.scissor_minion,
 			this.pebble
 		];
-		
+
 		this.character = 0;
 		this.mirrored = false;
 	}
@@ -306,6 +312,7 @@ class Game
 		
 		
 		this.scissor_minion.update();
+		this.plane.update();
 		this.pebble.update();
 		
 		//this.pebble.update();
