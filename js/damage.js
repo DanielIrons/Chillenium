@@ -19,3 +19,17 @@ class PlayerAttackBoxes
 		this.RightRect = new Rect(x2,y2,w2,h2);
 	}
 }
+
+class HitBox
+{
+	constructor (x,y,w,h)
+	{
+		this.hitbox = new Rect(x,y,w,h);
+	}
+	
+	translate(x,y)
+	{
+		this.hitbox.x = x;
+		this.hitbox.y = y;
+	}
+}

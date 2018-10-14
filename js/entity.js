@@ -13,7 +13,7 @@ class SpriteIndex
 var y = 80;
 class Paper_Player
 {
-	constructor(index, gl, vs, fs, attackboxes)
+	constructor(index, gl, vs, fs, attackboxes, hitbox)
 	{
 		this.index = index;
 		this.pos = new Point(100, y);
@@ -25,6 +25,8 @@ class Paper_Player
 		this.mirrored = 1;
 		this.isGrounded = true;
 		this.weight = 0.9;
+		this.attackboxes = attackboxes;
+		this.hitbox = hitbox;
 
 		
 		this.walk = new Sprite(gl, "img/paper_move.png", vs, fs, {width:16, height:16});
@@ -89,6 +91,7 @@ class Paper_Player
 			this.curr = this.attack;
 			this.currNum = 3;
 		}
+		this.hitbox.translate(this.pos.x, this.pos.x);
 	}
 	
 	render()
@@ -122,7 +125,7 @@ class Paper_Player
 
 class Scissor_Player
 {
-	constructor(index, gl, vs, fs, attackboxes)
+	constructor(index, gl, vs, fs, attackboxes, hitboxes)
 	{
 		this.index = index;
 		this.pos = new Point(100, y);
@@ -134,7 +137,8 @@ class Scissor_Player
 		this.mirrored = 1;
 		this.isGrounded = true;
 		this.weight = 1.2;
-
+		this.attackboxes = attackboxes;
+		this.hitbox = hitbox;
 		
 		this.walk = new Sprite(gl, "img/scissor_move.png", vs, fs, {width:16, height:16});
 		this.special = new Sprite(gl, "img/scissor_special.png", vs, fs, {width:16, height:16});
@@ -199,6 +203,7 @@ class Scissor_Player
 			this.curr = this.attack;
 			this.currNum = 3
 		}
+		this.hitbox.translate(this.pos.x, this.pos.x)
 	}
 	
 	render()
@@ -233,7 +238,7 @@ class Scissor_Player
 
 class Rock_Player
 {
-	constructor(index, gl, vs, fs, attackboxes)
+	constructor(index, gl, vs, fs, attackboxes, hitbox)
 	{
 		this.index = index;
 
@@ -246,7 +251,8 @@ class Rock_Player
 		this.mirrored = 1;
 		this.isGrounded = true;
 		this.weight = 1.8;
-
+		this.attackboxes = attackboxes;
+		this.hitbox = hitbox;
 		
 		this.walk = new Sprite(gl, "img/rock_move.png", vs, fs, {width:16, height:16});
 		this.special = new Sprite(gl, "img/rock_special.png", vs, fs, {width:16, height:16});
@@ -316,6 +322,7 @@ class Rock_Player
 			this.curr = this.attack;
 			this.currNum = 3;
 		}
+		this.hitbox.translate(this.pos.x, this.pos.x)
 	}
 	
 	render()
