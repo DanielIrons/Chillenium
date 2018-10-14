@@ -32,6 +32,7 @@ var Key = {
 
 		//index list of current enemies in the scene:
 var enemyList = [];
+var valuesCheck = [];
 
 class Game
 {
@@ -109,7 +110,7 @@ class Game
 		
 		this.rock_index = new SpriteIndex();
 		this.rock_index.addSprite(4, 0.008); // move
-		this.rock_index.addSprite(4, 0.02); // special
+		this.rock_index.addSprite(4, 0.002); // special
 		this.rock_index.addSprite(2, 0.003); // idle
 		this.rock_index.addSprite(5, 0.009); // attack
 		this.rock_index.addSprite(6, 0.02); // switch
@@ -163,14 +164,19 @@ class Game
 	
 	move(num)
 	{
+		this.valuesCheck = [];
 		
-		if(this.right % 128 == 0) 
+		if(this.right % 128 == 0 && this.right !=0) 
 		{
-			for(var i = 0; i < (this.right / 128); i++) {
-				var scissor_minion_temp = new Scissor_Minion(this.scissor_minion_index, this.gl, this.vs, this.fs, this.right + Math.floor((Math.random()*200)+160));
-				var pebble_temp = new Pebble(this.pebble_index, this.gl, this.vs, this.fs, this.right + Math.floor((Math.random()*200)+160));
-				enemyList.push(scissor_minion_temp, pebble_temp);
+			if(valuesCheck.indexOf(this.right) == -1) 
+			{
+				for(var i = 0; i < 3; i++) {
+					var scissor_minion_temp = new Scissor_Minion(this.scissor_minion_index, this.gl, this.vs, this.fs, this.right + Math.floor((Math.random()*200)+160));
+					var pebble_temp = new Pebble(this.pebble_index, this.gl, this.vs, this.fs, this.right + Math.floor((Math.random()*200)+160));
+					enemyList.push(scissor_minion_temp, pebble_temp);
+				}
 			}
+			valuesCheck.push(this.right);
 		}
 		if (this.character == 0){
 		this.backSpeed = 1;
@@ -180,6 +186,9 @@ class Game
 		}
 		if (this.character == 2){
 		this.backSpeed = 1.35;
+		}
+		if(this.rock_player.currNum == 1 && this.character == 1){
+			this.backSpeed = 0.1
 		}
 		
 		
@@ -275,7 +284,13 @@ class Game
 	
 	update()
 	{
-		
+		enemyList.forEach(function(element) {
+			if(element.isAlive == false)
+			{
+				enemyList.splice(enemyList.indexOf(element), 1);
+			}
+		});
+
 		if (this.character == 0){
 		this.backSpeed = 1;
 		}
