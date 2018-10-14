@@ -1,3 +1,4 @@
+
 class Scissor_Minion
 {
 	constructor(index, gl, vs, fs)
@@ -5,11 +6,11 @@ class Scissor_Minion
 		this.index = index;
 		this.pos = new Point(130, 88);
 		this.frame = new Point();
-
+		this.isAlive = true;
 		
 		this.walk = new Sprite(gl, "img/scissor_minion_move.png", vs, fs, {width:8, height:8});
 		this.idle = new Sprite(gl, "img/scissor_minion_idle.png", vs, fs, {width:8, height:8});
-		this.hitbox = new HitBox(this.pos.x, this.pos.y, 8, 8);
+		this.hitbox = new Hit_Box(this.pos.x, this.pos.y, 8, 8);
 		
 		this.curr = this.idle;
 		this.currNum = 1;
@@ -18,6 +19,8 @@ class Scissor_Minion
 	
 	update()
 	{	
+	if (this.isAlive == true)
+	{
 		this.curr = this.idle;
 		this.currNum = 1;
 		
@@ -34,6 +37,7 @@ class Scissor_Minion
 		}
 				
 		this.render();
+	}
 	}
 	
 	movement(num)
@@ -149,7 +153,7 @@ class Pebble
 		
 		this.walk = new Sprite(gl, "img/pebble_move.png", vs, fs, {width:16, height:16});
 		this.idle = new Sprite(gl, "img/pebble_move.png", vs, fs, {width:16, height:16});
-		this.hitbox = new HitBox(this.pos.x, this.pos.y, 16, 16);
+		this.hitbox = new Hit_Box(this.pos.x, this.pos.y, 16, 16);
 		
 		this.curr = this.idle;
 		this.currNum = 1;
@@ -227,7 +231,7 @@ class Boulder
 		
 		this.attack = new Sprite(gl, "img/boulder_attack.png", vs, fs, {width:16, height:16});
 		this.idle = new Sprite(gl, "img/boulder_idle.png", vs, fs, {width:16, height:16});
-		this.hitbox = new HitBox(this.pos.x, this.pos.y, 16, 16);
+		this.hitbox = new Hit_Box(this.pos.x, this.pos.y, 16, 16);
 
 		this.curr = this.idle;
 		this.currNum = 1;

@@ -94,7 +94,7 @@ class Paper_Player
 			this.curr = this.attack;
 			this.currNum = 3;
 		}
-		this.hitbox.translate(this.pos.x, this.pos.x);
+		this.hitbox.translate(this.pos.x, this.pos.y);
 	}
 	
 	render()
@@ -103,7 +103,7 @@ class Paper_Player
 		this.pos.y += this.vel.y;
 		this.acc.y+= this.weight;
 		y = this.pos.y;
-		console.log(y);1
+
 		if (this.acc.y >0 && this.vel.y > this.weight*(1/20)){//fallspeed
 			this.vel.y = this.weight*(1/20);
 		}
@@ -210,7 +210,7 @@ class Scissor_Player
 			this.curr = this.attack;
 			this.currNum = 3
 		}
-		this.hitbox.translate(this.pos.x, this.pos.x)
+		this.hitbox.translate(this.pos.x, this.pos.y);
 	}
 	
 	render()
@@ -219,7 +219,6 @@ class Scissor_Player
 		this.pos.y += this.vel.y;
 		this.acc.y+= this.weight;
 		y = this.pos.y;
-		console.log(y);
 		if (this.acc.y >0 && this.vel.y > this.weight){
 			this.vel.y = this.weight;
 		}
@@ -332,7 +331,7 @@ class Rock_Player
 			this.curr = this.attack;
 			this.currNum = 3;
 		}
-		this.hitbox.translate(this.pos.x, this.pos.x)
+		this.hitbox.translate(this.pos.x, this.pos.y);
 	}
 	
 	render()
@@ -341,7 +340,6 @@ class Rock_Player
 		this.pos.y += this.vel.y;
 		this.acc.y+= this.weight;
 		y = this.pos.y;
-		console.log(y);
 		if (this.pos.y >= 80)
 		{
 			this.pos.y = 80;
