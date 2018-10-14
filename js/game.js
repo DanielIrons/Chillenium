@@ -34,10 +34,11 @@ class Game
 {
 	constructor()
 	{
+		this.backSpeed = 0;
 		this.canvasElem = document.createElement("canvas");
 		this.canvasElem.width = 0;
 		this.canvasElem.height = 0;
-		
+		this.planeLand = 0;
 		this.worldSpaceMatrix = new M3x3();
 		
 		this.gl = this.canvasElem.getContext("webgl2");
@@ -131,6 +132,7 @@ class Game
 
 		this.plane_index = new SpriteIndex();
 		this.plane_index.addSprite(2, 0.002);
+		this.plane_index.addSprite(1, 0.001);
 		this.plane = new Plane(this.plane_index, this.gl, vs, fs);
 
 
@@ -180,6 +182,9 @@ class Game
 			this.title_pos.x += 1*this.backSpeed;
 			this.title_pos3.x += 0.96*this.backSpeed;
 			this.title_pos2.x += 0.98*this.backSpeed;
+			if(this.planeLand == 1){
+				this.plane.pos.x += 1*this.backSpeed;
+			}
 
 			if (this.grass_pos.x > 0)
 			{
@@ -199,7 +204,7 @@ class Game
 			}
 			
 		}
-		if (num == 1)
+		if (num == 1)//Left
 		{
 			this.mirrored = false;
 			
@@ -211,6 +216,15 @@ class Game
 			this.title_pos.x -= 1*this.backSpeed;
 			this.title_pos3.x -= 0.96*this.backSpeed;
 			this.title_pos2.x -= 0.98*this.backSpeed;
+			if(this.planeLand == 1){
+
+				this.plane.pos.x -= 1*this.backSpeed;
+				if (this.plane.pos.x < -16){
+					this.plane.pos.x = 280;
+					this.plane.pos.y = 15;
+				}
+			}
+
 			if (this.grass_pos.x < -128)
 			{
 				this.grass_pos.x += 128;
@@ -234,13 +248,28 @@ class Game
 	
 	update()
 	{
+		if (this.character == 0){
+		this.backSpeed = 1;
+		}
+		if (this.character == 1){
+		this.backSpeed = 0.6;
+		}
+		if (this.character == 2){
+		this.backSpeed = 1.35;
+		}
+
 		this.gl.viewport(0, -545, this.canvasElem.width * 1.7, this.canvasElem.height * 1.7); // scales and moves the canvas
 		this.gl.clear(this.gl.COLOR_BUFFER_BIT); // bg color
 		
 		// allows transparency
 		this.gl.enable(this.gl.BLEND);
 		this.gl.blendFunc(this.gl.SRC_ALPHA, this.gl.ONE_MINUS_SRC_ALPHA); 
-		
+	
+
+		if(this.plane.update()){
+			console.log("X:" + this.plane.pos.x + "Y:" + this.plane.pos.y);
+			this.planeLand = 1;
+		}
 		
 		
 		if (Key.isDown(Key.LEFT)) this.move(0);
@@ -251,7 +280,7 @@ class Game
 		this.trees.render(this.trees_pos, this.bg_frames, 1);
 		this.hills.render(this.hills_pos, this.bg_frames, 1);
 		this.grass_cont.render(this.grass_cont_pos, this.bg_frames, 1);
-		
+		var b=this.plane.update();
 		if (Key.isDown(Key.J))
 		{
 			this.character = 0;
@@ -312,7 +341,7 @@ class Game
 		
 		
 		this.scissor_minion.update();
-		this.plane.update();
+
 		this.pebble.update();
 		
 		//this.pebble.update();

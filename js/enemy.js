@@ -83,15 +83,19 @@ class Plane{
 	constructor(index, gl, vs, fs)
 	{
 		this.index = index;
-		this.pos = new Point(140, 30);
+		this.pos = new Point(200, 20);
 		this.frame = new Point();
 		this.idle = new Sprite(gl, "img/paper_airplane.png", vs, fs, {width:16, height:16});
 	}
 	update()
 	{	
 		this.curr = this.idle;
-		this.currNum = 1;
-		
+		this.currNum = 0;
+		if (this.pos.y >=80){
+			this.render();
+			return 1;
+		}
+		else{
 		if(Math.abs(100-this.pos.x) < 128) { // instead of 35 you subtract 27 bc need from mid of character
 			if(((73) < this.pos.x && this.mirrored == -1) || 127<=this.pos.x)
 			{
@@ -106,33 +110,44 @@ class Plane{
 		}
 		
 		this.render();
-	}
+		return 0;
+	}}
 	movement(num)
 	{	
-
+	if(this.pos.y < 80){
+		
+		
 		if (num == -1) //move left
 		{
-			if (this.mirrored == 1)
+			this.curr = this.idle;
+			this.currNum = 0;
+			if (this.mirrored == -1)
 			{
-				this.pos.x += 15;
+				this.pos.x -= 5;
 			}
-			this.mirrored = -1;
+			this.mirrored = 1;
 			this.pos.x-=.5;
 			this.pos.y+=0.25;
 		}
 		if (num == 1) // move right	
 		{
-			this.curr = this.walk;
+			this.curr = this.idle;
 			this.currNum = 0;
-			if (this.mirrored == -1)
+			if (this.mirrored == 1)
 			{
-				this.pos.x -= 15;
+				this.pos.x += 5;
 			}
-			this.mirrored = 1;
+			this.mirrored = -1;
 			this.pos.y+=0.25;
 			this.pos.x+=.5;
+	}
 		}
-		this.hitbox.translate(this.pos.x, this.pos.y);
+	else{
+		this.currNum = 1;
+		this.curr = this.idle
+		
+	}
+			//this.hitbox.translate(this.pos.x, this.pos.y);
 	}
 	render()
 	{	
