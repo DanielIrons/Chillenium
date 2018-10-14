@@ -11,12 +11,13 @@ class SpriteIndex
 	}
 }
 var y = 80;
+var x = 100;
 class Paper_Player
 {
 	constructor(index, gl, vs, fs, attackboxes, hitbox)
 	{
 		this.index = index;
-		this.pos = new Point(100, y);
+		this.pos = new Point(x, y);
 		this.vel = new Point();
 		this.acc = new Point();
 		this.acc.y = 0.01;
@@ -130,7 +131,7 @@ class Scissor_Player
 	constructor(index, gl, vs, fs, attackboxes, hitbox)
 	{
 		this.index = index;
-		this.pos = new Point(100, y);
+		this.pos = new Point(x, y);
 		this.vel = new Point();
 		this.acc = new Point();
 		this.acc.y = 0.01;
@@ -239,7 +240,7 @@ class Rock_Player
 	{
 		this.index = index;
 
-		this.pos = new Point(100, y);
+		this.pos = new Point(x, y);
 		this.vel = new Point();
 		this.acc = new Point();
 		this.acc.y = 0.01;

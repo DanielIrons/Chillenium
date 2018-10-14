@@ -106,9 +106,9 @@ class Game
 		this.PaperAttackBoxes = new PlayerAttackCircs(104, 85, 3, 112, 85, 3);
 		this.RockAttackBoxes = new PlayerAttackCircs(108, 88, 8, 108, 88, 8);
 		
-		this.PaperHitBox = new Hit_Circ(112, 85, 5);
-		this.RockHitBox = new Hit_Circ(112, 88, 7);
-		this.ScissorHitBox = new Hit_Circ(112, 81, 5);
+		this.PaperHitBox = new Hit_Circ(80, 85, 5);
+		this.RockHitBox = new Hit_Circ(80, 88, 7);
+		this.ScissorHitBox = new Hit_Circ(80, 81, 5);
 
 		this.paper_index = new SpriteIndex();
 		this.paper_index.addSprite(12, 0.02); // move
@@ -174,7 +174,7 @@ class Game
 	{
 		this.valuesCheck = [];
 		
-		if(this.right % 128 == 0 && this.right !=0) 
+		if(this.right % 64 == 0 && this.right !=0) 
 		{
 			if(valuesCheck.indexOf(this.right) == -1) 
 			{
@@ -192,7 +192,7 @@ class Game
 					}
 					else if (x==2)
 					{
-						// paper enemy
+						var minion = new Plane(this.plane_index, this.gl, this.vs, this.fs, this.right + Math.floor((Math.random()*200)+160));
 					}
 					enemyList.push(minion);
 				}
@@ -200,18 +200,19 @@ class Game
 			valuesCheck.push(this.right);
 		}
 		if (this.character == 0){
-		this.backSpeed = 1;
+		this.backSpeed = 1.5;
 		}
 		if (this.character == 1){
-		this.backSpeed = 0.6;
+		this.backSpeed = 1.5;
 		}
 		if (this.character == 2){
-		this.backSpeed = 1.35;
+		this.backSpeed = 1.5;
 		}
+		/*
 		if(this.rock_player.currNum == 1 && this.character == 1){
 			this.backSpeed = 0.1
 		}
-		
+		*/
 		
 		if(this.paper_player.currNum != 1){
 		if (num == 0)
@@ -340,24 +341,13 @@ class Game
 		{
 			this.character = 2;
 		}
-		
+
 		// collisions
 		for(var i = 0; i < enemyList.length; i++)
 		{
 			if (enemyList[i].isAlive == true)
 			{
-				if (this.character == 0)
-				{
-					this.Circ1 = this.PaperHitBox.hitbox;
-				}
-				if (this.character == 1)
-				{
-					this.Circ1 = this.RockHitBox.hitbox;
-				}
-				if (this.character == 2)
-				{
-					this.Circ1 = this.ScissorHitBox.hitbox;
-				}
+				this.Circ1 = new Circ(110, 80, 1);
 				
 				this.Circ2 = enemyList[i].hitbox.hitbox;
 				
@@ -379,7 +369,7 @@ class Game
 						else if (enemyList[i].isRock)
 						{
 							this.paper_player.animate();
-							enemyList[i].deal_damage(3);
+							enemyList[i].deal_damage(10);
 						}
 						else if (enemyList[i].isScissor)
 						{
@@ -398,14 +388,14 @@ class Game
 						}
 						else if (enemyList[i].isScissor)
 						{
-							enemyList[i].deal_damage(3);
+							enemyList[i].deal_damage(10);
 						}
 					}
 					else if (this.character == 2) // scissor
 					{
 						if (enemyList[i].isPaper)
 						{
-							enemyList[i].deal_damage(3);
+							enemyList[i].deal_damage(10);
 						}
 						else if (enemyList[i].isRock)
 						{
