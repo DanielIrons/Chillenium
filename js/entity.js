@@ -58,6 +58,8 @@ class Paper_Player
 			this.curr = this.trans;
 			this.currNum = 4;
 		}
+		this.hitbox.translate(this.pos.x, this.pos.y);
+		this.attackboxes.translateUp(this.pos.y);
 		
 		this.render();
 	}
@@ -94,7 +96,6 @@ class Paper_Player
 			this.curr = this.attack;
 			this.currNum = 3;
 		}
-		this.hitbox.translate(this.pos.x, this.pos.y);
 	}
 	
 	render()
@@ -175,6 +176,8 @@ class Scissor_Player
 			this.curr = this.trans;
 			this.currNum = 4;
 		}
+		this.attackboxes.translateUp(this.pos.y);
+		this.hitbox.translate(this.pos.x, this.pos.y);
 		
 		this.render();
 	}
@@ -211,7 +214,6 @@ class Scissor_Player
 			this.curr = this.attack;
 			this.currNum = 3
 		}
-		this.hitbox.translate(this.pos.x, this.pos.y);
 	}
 	
 	render()
@@ -245,7 +247,7 @@ class Scissor_Player
 
 class Rock_Player
 {
-	constructor(index, gl, vs, fs, attackboxes, hitbox)
+	constructor(index, gl, vs, fs, attackbox, hitbox)
 	{
 		this.index = index;
 
@@ -260,9 +262,8 @@ class Rock_Player
 		this.weight = 1.8;
 		this.hp = 5;
 
-		this.attackboxes = attackboxes;
 		this.hitbox = hitbox;
-
+		this.attackbox = attackbox;
 		
 		this.walk = new Sprite(gl, "img/rock_move.png", vs, fs, {width:16, height:16});
 		this.special = new Sprite(gl, "img/rock_special.png", vs, fs, {width:16, height:16});
