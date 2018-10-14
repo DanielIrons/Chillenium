@@ -128,11 +128,11 @@ class Game
 		this.boulder_index.addSprite(7, 0.01); // startup
 		this.boulder = new Boulder(this.boulder_index, this.gl, vs, fs);
 
-
+		/*
 		this.plane_index = new SpriteIndex();
 		this.plane_index.addSprite(2, 0.002);
 		this.plane = new Plane(this.plane_index, this.gl, vs, fs);
-
+		*/
 
 		
 		//index list of current enemies in the scene:
@@ -312,7 +312,7 @@ class Game
 		
 		
 		this.scissor_minion.update();
-		this.plane.update();
+		//this.plane.update();
 		this.pebble.update();
 		
 		//this.pebble.update();

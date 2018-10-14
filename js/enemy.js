@@ -78,7 +78,7 @@ class Scissor_Minion
 		this.curr.render(this.pos, this.frame, this.mirrored);
 	}
 }
-
+/*
 class Plane{
 	constructor(index, gl, vs, fs)
 	{
@@ -132,7 +132,7 @@ class Plane{
 			this.pos.y+=0.25;
 			this.pos.x+=.5;
 		}
-		this.hitbox.translate(this.pos.x, this.pos.y);
+		//this.hitbox.translate(this.pos.x, this.pos.y);
 	}
 	render()
 	{	
@@ -141,7 +141,7 @@ class Plane{
 	}
 
 }
-
+*/
 class Pebble
 {
 	constructor(index, gl, vs, fs)
