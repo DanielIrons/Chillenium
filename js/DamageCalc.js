@@ -1,12 +1,16 @@
 //Damage calc
-function playerDamageCalc(taker, dealer, weight){
+function playerDamageCalc(taker, dealer, dealerWeight){
 	// 0 for paper, 1 is rock, 2 is scissor, 4 is dodge, 5 for invulnerable
 	//double damage for super effective
 	//half for ineffective
 	//class is 0 for light 1 for heavy
+	//3 is dash (not yet implemented)
 	var usualDam = 0;
+	if (form == 3){
+		if()
+	}
 	if(form == 0){//paper
-		if(weight){
+		if(dealerWeight){
 			usualDam = 2;
 		}
 		else{
@@ -24,7 +28,7 @@ function playerDamageCalc(taker, dealer, weight){
 
 	}
 	if(form == 1){//rock
-		if(weight){
+		if(dealerWeight){
 			usualDam = 1;
 		}
 		else{
@@ -43,7 +47,7 @@ function playerDamageCalc(taker, dealer, weight){
 	}
 
 	if(form == 2){//scissors
-		if(weight){
+		if(dealerWeight){
 			usualDam = 1.5;
 		}
 		else{
@@ -66,7 +70,7 @@ function playerDamageCalc(taker, dealer, weight){
 	}
 
 	if(enemyForm == 5){
-		return weight;
+		return dealerWeight;
 	}
 
 }
