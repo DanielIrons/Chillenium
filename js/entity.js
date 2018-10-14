@@ -125,7 +125,7 @@ class Paper_Player
 
 class Scissor_Player
 {
-	constructor(index, gl, vs, fs, attackboxes, hitboxes)
+	constructor(index, gl, vs, fs, attackboxes, hitbox)
 	{
 		this.index = index;
 		this.pos = new Point(100, y);
