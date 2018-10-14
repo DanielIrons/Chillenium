@@ -169,7 +169,7 @@ class Game
 		}
 		
 		
-
+		if(this.paper_player.currNum != 1){
 		if (num == 0)
 		{
 			this.mirrored = true;
@@ -245,6 +245,7 @@ class Game
 		}
 	
 	}
+}
 	
 	update()
 	{
