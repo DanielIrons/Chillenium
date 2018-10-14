@@ -78,7 +78,6 @@ class Scissor_Minion
 		this.curr.render(this.pos, this.frame, this.mirrored);
 	}
 }
-
 class Plane{
 	constructor(index, gl, vs, fs)
 	{
@@ -127,7 +126,7 @@ class Plane{
 			}
 			this.mirrored = 1;
 			this.pos.x-=.5;
-			this.pos.y+=0.25;
+			this.pos.y+=0.2;
 		}
 		if (num == 1) // move right	
 		{
@@ -138,7 +137,7 @@ class Plane{
 				this.pos.x += 5;
 			}
 			this.mirrored = -1;
-			this.pos.y+=0.25;
+			this.pos.y+=0.2;
 			this.pos.x+=.5;
 	}
 		}
@@ -156,7 +155,6 @@ class Plane{
 	}
 
 }
-
 class Pebble
 {
 	constructor(index, gl, vs, fs)
@@ -164,7 +162,7 @@ class Pebble
 		this.index = index;
 		this.pos = new Point(140, 80);
 		this.frame = new Point();
-
+		this.isAlive = true;
 		
 		this.walk = new Sprite(gl, "img/pebble_move.png", vs, fs, {width:16, height:16});
 		this.idle = new Sprite(gl, "img/pebble_move.png", vs, fs, {width:16, height:16});
@@ -177,6 +175,8 @@ class Pebble
 	
 	update()
 	{	
+	if (this.isAlive == true)
+	{
 		this.curr = this.idle;
 		this.currNum = 1;
 		
@@ -194,6 +194,7 @@ class Pebble
 		}
 		
 		this.render();
+	}
 	}
 	
 	movement(num)
