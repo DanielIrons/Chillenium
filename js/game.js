@@ -140,7 +140,8 @@ class Game
 		//index list of current enemies in the scene:
 		this.enemyList = [
 			this.scissor_minion,
-			this.pebble
+			this.pebble,
+			this.plane
 		];
 
 		this.character = 0;
@@ -267,8 +268,8 @@ class Game
 		this.gl.blendFunc(this.gl.SRC_ALPHA, this.gl.ONE_MINUS_SRC_ALPHA); 
 	
 
-		if(this.plane.update()){
-			console.log("X:" + this.plane.pos.x + "Y:" + this.plane.pos.y);
+		if(this.plane.update())
+		{
 			this.planeLand = 1;
 		}
 		
@@ -282,6 +283,9 @@ class Game
 		this.hills.render(this.hills_pos, this.bg_frames, 1);
 		this.grass_cont.render(this.grass_cont_pos, this.bg_frames, 1);
 		var b=this.plane.update();
+		
+		
+		
 		if (Key.isDown(Key.J))
 		{
 			this.character = 0;
@@ -340,21 +344,13 @@ class Game
 			this.paper_player.hp = this.scissor_player.hp;
 		}
 		
-		
 		this.scissor_minion.update();
-
-		
 		this.pebble.update();
-		
-		//this.pebble.update();
-		//this.boulder.update();
 		this.title3.render(this.title_pos3, this.bg_frames, 1);
 		this.title2.render(this.title_pos2, this.bg_frames, 1);
 		this.title.render(this.title_pos, this.bg_frames, 1);
 		this.grass.render(this.grass_pos, this.bg_frames, 1);
-		
-		//this.box.render(this.coords, this.bg_frames, 1);
-		
+				
 
 		
 		this.gl.flush();

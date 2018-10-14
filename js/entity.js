@@ -204,7 +204,7 @@ class Scissor_Player
 		if (num == 4) // special
 		{
 			this.curr = this.special;
-			this.currNum =- 1;
+			this.currNum = 1;
 		}
 		if(num == 5) // attack
 		{

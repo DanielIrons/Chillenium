@@ -78,6 +78,8 @@ class Scissor_Minion
 		this.curr.render(this.pos, this.frame, this.mirrored);
 	}
 }
+
+
 class Plane{
 	constructor(index, gl, vs, fs)
 	{
@@ -85,32 +87,43 @@ class Plane{
 		this.pos = new Point(200, 20);
 		this.frame = new Point();
 		this.idle = new Sprite(gl, "img/paper_airplane.png", vs, fs, {width:16, height:16});
+		this.hitbox = new Hit_Box(this.pos.x, this.pos.y, 16, 16);
+		this.isAlive = true;
+
 	}
 	update()
 	{	
+	if (this.isAlive == true)
+	{
 		this.curr = this.idle;
 		this.currNum = 0;
-		if (this.pos.y >=80){
+		if (this.pos.y >=80)
+		{
 			this.render();
 			return 1;
 		}
-		else{
-		if(Math.abs(100-this.pos.x) < 128) { // instead of 35 you subtract 27 bc need from mid of character
-			if(((73) < this.pos.x && this.mirrored == -1) || 127<=this.pos.x)
+		else
+		{
+			if(Math.abs(100-this.pos.x) < 128) 
+			{ // instead of 35 you subtract 27 bc need from mid of character
+				if(((73) < this.pos.x && this.mirrored == -1) || 127<=this.pos.x)
+				{
+					this.movement(-1);
+				}
+				if(((127) > this.pos.x && this.mirrored == 1) || 73>=this.pos.x) 
+				{	
+					this.movement(1);
+				}
+			} 		
+			else 
 			{
 				this.movement(-1);
 			}
-			if(((127) > this.pos.x && this.mirrored == 1) || 73>=this.pos.x) 
-			{	
-				this.movement(1);
-			}
-		} else {
-			this.movement(-1);
+			this.render();
+			return 0;
 		}
-		
-		this.render();
-		return 0;
-	}}
+	}
+	}
 	movement(num)
 	{	
 	if(this.pos.y < 80){
@@ -146,7 +159,7 @@ class Plane{
 		this.curr = this.idle
 		
 	}
-			//this.hitbox.translate(this.pos.x, this.pos.y);
+	this.hitbox.translate(this.pos.x, this.pos.y);
 	}
 	render()
 	{	
@@ -155,6 +168,7 @@ class Plane{
 	}
 
 }
+
 class Pebble
 {
 	constructor(index, gl, vs, fs)
