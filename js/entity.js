@@ -13,7 +13,7 @@ class SpriteIndex
 
 class Paper_Player
 {
-	constructor(index, gl, vs, fs)
+	constructor(index, gl, vs, fs, attackboxes)
 	{
 		this.index = index;
 		this.pos = new Point(100, 80);
@@ -120,7 +120,7 @@ class Paper_Player
 
 class Scissor_Player
 {
-	constructor(index, gl, vs, fs)
+	constructor(index, gl, vs, fs, attackboxes)
 	{
 		this.index = index;
 		this.pos = new Point(100, 80);
@@ -230,7 +230,7 @@ class Scissor_Player
 
 class Rock_Player
 {
-	constructor(index, gl, vs, fs)
+	constructor(index, gl, vs, fs, attackboxes)
 	{
 		this.index = index;
 		this.pos = new Point(100, 80);

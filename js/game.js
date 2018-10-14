@@ -73,6 +73,19 @@ class Game
 		this.title_pos2 = new Point(50, 0);
 		this.title3 = new Sprite(this.gl, "img/title_dark.png", vs, fs, {width: 128, height: 128});
 		this.title_pos3 = new Point(50, 0);
+		
+		/*
+		this.box = new Sprite (this.gl, "img/blankBox.png", vs, fs, {width: 16, height: 32});
+		this.coords = new Point(75, 65);
+		this.frame = new Point();
+		this.box2 = new Sprite (this.gl, "img/blankBox.png", vs, fs, {width: 16, height: 32});
+		this.coords2 = new Point(125, 65);
+		*/
+		
+		this.ScissorAttackBoxes = new PlayerAttackBoxes(95, 80, 8, 16, 113, 80, 8, 16);
+		this.PaperAttackBoxes = new PlayerAttackBoxes(100, 80 ,8, 16, 109, 80, 8, 16);
+		this.RockAttackBoxes = new PlayerAttackBoxes(75, 65 ,16, 32, 125, 65, 16, 32);
+		
 
 		this.paper_index = new SpriteIndex();
 		this.paper_index.addSprite(12, 0.02); // move
@@ -80,7 +93,7 @@ class Game
 		this.paper_index.addSprite(2, 0.003); // idle
 		this.paper_index.addSprite(9, 0.02); // attack
 		this.paper_index.addSprite(6, 0.02); // switch
-		this.paper_player = new Paper_Player(this.paper_index, this.gl, vs, fs);
+		this.paper_player = new Paper_Player(this.paper_index, this.gl, vs, fs, this.PaperAttackBoxes);
 		
 		this.rock_index = new SpriteIndex();
 		this.rock_index.addSprite(4, 0.008); // move
@@ -88,7 +101,7 @@ class Game
 		this.rock_index.addSprite(2, 0.003); // idle
 		this.rock_index.addSprite(5, 0.02); // attack
 		this.rock_index.addSprite(6, 0.02); // switch
-		this.rock_player = new Rock_Player(this.rock_index, this.gl, vs, fs);
+		this.rock_player = new Rock_Player(this.rock_index, this.gl, vs, fs, this.RockAttackBoxes);
 		
 		this.scissor_index = new SpriteIndex();
 		this.scissor_index.addSprite(8, 0.01); // move
@@ -96,7 +109,7 @@ class Game
 		this.scissor_index.addSprite(4, 0.01); // idle
 		this.scissor_index.addSprite(3, 0.006); // attack
 		this.scissor_index.addSprite(6, 0.02); // switch
-		this.scissor_player = new Scissor_Player(this.scissor_index, this.gl, vs, fs);
+		this.scissor_player = new Scissor_Player(this.scissor_index, this.gl, vs, fs, this.ScissorAttackBoxes);
 		
 		this.scissor_minion_index = new SpriteIndex();
 		this.scissor_minion_index.addSprite(4, 0.005); // move
@@ -247,6 +260,7 @@ class Game
 			this.scissor_player.update();
 		}
 		
+		
 		this.scissor_minion.update();
 		this.pebble.update();
 		this.boulder.update();
@@ -254,7 +268,7 @@ class Game
 		this.title2.render(this.title_pos2, this.bg_frames, 1);
 		this.title.render(this.title_pos, this.bg_frames, 1);
 		this.grass.render(this.grass_pos, this.bg_frames, 1);
-
+		
 		
 		
 
