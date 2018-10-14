@@ -10,25 +10,39 @@ class Rect
 	}
 }
 
-
-class PlayerAttackBoxes
+class Circ
 {
-	constructor (x, y, w, h, x2, y2, w2, h2)
+	constructor(x, y, r)
 	{
-		this.LeftRect = new Rect(x,y,w,h);
-		this.RightRect = new Rect(x2,y2,w2,h2);
+		this.x = x;
+		this.y = y;
+		this.r = r;
+	}
+	
+}
+
+
+class PlayerAttackCircs
+{
+	constructor (x, y, r, x2, y2, r2)
+	{
+		this.LeftCirc = new Circ(x,y,r);
+		this.RightCirc = new Circ(x2,y2,r2);
+	}
+	
+	translateUp(y)
+	{
+		this.LeftCirc.y = y;
+		this.RightCirc.y = y;
 	}
 	
 	check_collisions(enemyList, mirrored)
 	{
 		for(var i = 0; i < enemyList.length; i++)
 		{
-			if (mirrored == false)
+			if (enemyList[i].isAlive == true)
 			{
-				this.Rect1 = this.RightRect;
-			}
-			else 
-			{
+<<<<<<< HEAD
 				this.Rect1 = this.LeftRect;
 			}
 			this.Rect2 = enemyList[i].hitbox.hitbox;
@@ -41,10 +55,52 @@ class PlayerAttackBoxes
 					// deal damage to enemy...
 
 					enemyList[i].isAlive = false;
+=======
+				if (mirrored == false)
+				{
+					this.Circ1 = this.RightCirc;
+					console.log(this.Circ1);
 				}
+				else 
+				{
+					this.Circ1 = this.LeftCirc;
+					this.Circ1 = this.RightCirc;
+					console.log(this.Circ1);
+				}
+				this.Circ2 = enemyList[i].hitbox.hitbox;
+				
+				this.dx = this.Circ1.x - this.Circ2.x;
+				this.dy = this.Circ1.y - this.Circ2.y;
+				this.dist = Math.sqrt(this.dx * this.dx + this.dy + this.dy);
+				
+				if (this.dist < this.Circ1.r + this.Circ2.r)
+				{
+					// deal damage to enemy...
+					//console.log("collision detected! ... \n");
+					enemyList[i].deal_damage(2);
+					return true;
+>>>>>>> c7fd19d256c08fb12dd58a645092db30ad0fedf4
+				}
+			}
 		}
+		return false;
 	}
 }
+
+class Hit_Circ
+{
+	constructor (x,y,r)
+	{
+		this.hitbox = new Circ(x, y, r);
+	}
+	
+	translate(x,y)
+	{
+		this.hitbox.x = x;
+		this.hitbox.y = y;
+	}
+}
+
 
 class Hit_Box
 {

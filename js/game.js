@@ -80,19 +80,22 @@ class Game
 		this.title3 = new Sprite(this.gl, "img/title_dark.png", this.vs, this.fs, {width: 128, height: 128});
 		this.title_pos3 = new Point(50, 0);
 		
+		this.pew = new Sprite(this.gl, "img/small_death.png", vs, fs, {width: 16, height: 16});
+		this.pew_pos = new Point();
+		this.pew_frames = new Point(4,0);
 		
 		this.box = new Sprite (this.gl, "img/blankBox.png", this.vs, this.fs, {width: 6, height: 10});
 		this.coords = new Point(105, 83);
 		this.frame = new Point();
 		
 		
-		this.ScissorAttackBoxes = new PlayerAttackBoxes(95, 80, 8, 16, 113, 80, 8, 16);
-		this.PaperAttackBoxes = new PlayerAttackBoxes(100, 80 ,8, 16, 109, 80, 8, 16);
-		this.RockAttackBoxes = new PlayerAttackBoxes(75, 65 ,16, 32, 125, 65, 16, 32);
+		this.ScissorAttackBoxes = new PlayerAttackCircs(107, 81, 3, 109, 81, 3);
+		this.PaperAttackBoxes = new PlayerAttackCircs(104, 85, 3, 112, 85, 3);
+		this.RockAttackBoxes = new PlayerAttackCircs(108, 88, 8, 108, 88, 8);
 		
-		this.PaperHitBox = new Hit_Box(104, 83, 8, 10);
-		this.RockHitBox = new Hit_Box(100,80,16,16);
-		this.ScissorHitBox = new Hit_Box(105, 83, 6, 10);
+		this.PaperHitBox = new Hit_Circ(108, 85, 4);
+		this.RockHitBox = new Hit_Circ(108, 88, 7);
+		this.ScissorHitBox = new Hit_Circ(108, 81, 2);
 
 		this.paper_index = new SpriteIndex();
 		this.paper_index.addSprite(12, 0.02); // move
@@ -106,7 +109,7 @@ class Game
 		this.rock_index.addSprite(4, 0.008); // move
 		this.rock_index.addSprite(4, 0.02); // special
 		this.rock_index.addSprite(2, 0.003); // idle
-		this.rock_index.addSprite(5, 0.02); // attack
+		this.rock_index.addSprite(5, 0.009); // attack
 		this.rock_index.addSprite(6, 0.02); // switch
 		this.rock_player = new Rock_Player(this.rock_index, this.gl, this.vs, this.fs, this.RockAttackBoxes, this.RockHitBox);
 		
@@ -121,27 +124,51 @@ class Game
 		this.scissor_minion_index = new SpriteIndex();
 		this.scissor_minion_index.addSprite(4, 0.005); // move
 		this.scissor_minion_index.addSprite(1, 0.001); // idle
+<<<<<<< HEAD
+=======
+		this.scissor_minion_index.addSprite(4, 0.01); // death
+		this.scissor_minion = new Scissor_Minion(this.scissor_minion_index, this.gl, vs, fs);
+>>>>>>> c7fd19d256c08fb12dd58a645092db30ad0fedf4
 		
 		this.pebble_index = new SpriteIndex();
 		this.pebble_index.addSprite(4, 0.005); // move
 		this.pebble_index.addSprite(4, 0.003); // idle
+<<<<<<< HEAD
 		
+=======
+		this.pebble_index.addSprite(4, 0.01); // death
+		this.pebble = new Pebble(this.pebble_index, this.gl, vs, fs);
+>>>>>>> c7fd19d256c08fb12dd58a645092db30ad0fedf4
 		
 		this.boulder_index = new SpriteIndex();
 		this.boulder_index.addSprite(5, 0.006); // attack
 		this.boulder_index.addSprite(1, 0.001); // idle
 		this.boulder_index.addSprite(7, 0.01); // startup
+<<<<<<< HEAD
 		
 		this.plane_index = new SpriteIndex();
 		this.plane_index.addSprite(2, 0.002);
 		this.plane_index.addSprite(1, 0.001);
 		this.plane = new Plane(this.plane_index, this.gl, this.vs, this.fs);
 
+=======
+		this.boulder_index.addSprite(4, 0.01); // death
+		this.boulder = new Boulder(this.boulder_index, this.gl, vs, fs);
+
+		this.plane_index = new SpriteIndex();
+		this.plane_index.addSprite(2, 0.002);
+		this.plane_index.addSprite(1, 0.001);
+		this.plane_index.addSprite(4, 0.01); // death
+		this.plane = new Plane(this.plane_index, this.gl, vs, fs);
+		
+		
+>>>>>>> c7fd19d256c08fb12dd58a645092db30ad0fedf4
 		
 		
 
 		this.character = 0;
 		this.mirrored = false;
+		this.buffer = false;
 	}
 	
 	resize(x,y)
@@ -191,6 +218,8 @@ class Game
 			this.title_pos2.x += 0.98*this.backSpeed;
 			if(this.planeLand == 1){
 				this.plane.pos.x += 1*this.backSpeed;
+				this.plane.hitbox.x += 1*this.backSpeed;
+				this.plane.health_pos.x += this.backSpeed;
 			}
 
 			if (this.grass_pos.x > 0)
@@ -231,6 +260,9 @@ class Game
 					this.plane.pos.x = 280;
 					this.plane.pos.y = 15;
 				}
+				this.plane.hitbox.x -= this.backSpeed;
+				this.plane.health_pos.x -= this.backSpeed;
+				
 			}
 
 			if (this.grass_pos.x < -128)
@@ -329,14 +361,30 @@ class Game
 			}
 			else if (this.character == 2) // scissor
 			{
+<<<<<<< HEAD
 				this.ScissorAttackBoxes.check_collisions(enemyList, this.mirrored);
+=======
+			
+>>>>>>> c7fd19d256c08fb12dd58a645092db30ad0fedf4
 			}
 		}
 		if (Key.isDown(Key.O))
 		{
-			if (this.character == 0)
+			if (this.character == 0) // paper
 			{
+<<<<<<< HEAD
 				this.PaperAttackBoxes.check_collisions(enemyList, this.mirrored);
+=======
+				if (this.buffer == false)
+				{
+					//console.log(this.buffer);
+					this.buffer = this.PaperAttackBoxes.check_collisions(this.enemyList, this.mirrored);
+					if (this.buffer == true)
+						setTimeout(this.buffer = false, 1000);
+				}
+	
+				
+>>>>>>> c7fd19d256c08fb12dd58a645092db30ad0fedf4
 				if (this.mirrored == false)
 				{
 					this.move(1);
@@ -345,6 +393,14 @@ class Game
 				{
 					this.move(0);
 				}
+			}
+			else if (this.character == 1) // rock
+			{
+				
+			}
+			else if (this.character == 2) // scissor
+			{
+				this.ScissorAttackBoxes.check_collisions(this.enemyList, this.mirrored);
 			}
 		}
 		
