@@ -38,7 +38,17 @@ var gRight = 0;
 class Game
 {
 	constructor()
-	{
+	{	//Audio
+		this.rockSound = new Audio("music/Falling Rock.wav");
+		this.scissorSound = new Audio("music/knifesharpener1.flac");
+		this.paperSound = new Audio("music/paper_crush.wav");
+		this.minionDeath = new Audio("music/minionDeath.wav")
+		this.playerDeath = new Audio("music/playerDeath.wav")
+
+
+		//EndAudio
+		
+		
 		this.backSpeed = 0;
 		this.canvasElem = document.createElement("canvas");
 		this.canvasElem.width = 0;
