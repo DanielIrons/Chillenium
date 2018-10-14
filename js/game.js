@@ -84,13 +84,13 @@ class Game
 		this.frame = new Point();
 		
 		
-		this.ScissorAttackBoxes = new PlayerAttackBoxes(95, 80, 8, 16, 113, 80, 8, 16);
-		this.PaperAttackBoxes = new PlayerAttackBoxes(100, 80 ,8, 16, 109, 80, 8, 16);
-		this.RockAttackBoxes = new PlayerAttackBoxes(75, 65 ,16, 32, 125, 65, 16, 32);
+		this.ScissorAttackBoxes = new PlayerAttackCircs(107, 81, 3, 109, 81, 3);
+		this.PaperAttackBoxes = new PlayerAttackCircs(104, 85, 3, 112, 85, 3);
+		this.RockAttackBoxes = new PlayerAttackCircs(108, 88, 8, 108, 88, 8);
 		
-		this.PaperHitBox = new Hit_Box(104, 83, 8, 10);
-		this.RockHitBox = new Hit_Box(100,80,16,16);
-		this.ScissorHitBox = new Hit_Box(105, 83, 6, 10);
+		this.PaperHitBox = new Hit_Circ(108, 85, 4);
+		this.RockHitBox = new Hit_Circ(108, 88, 7);
+		this.ScissorHitBox = new Hit_Circ(108, 81, 2);
 
 		this.paper_index = new SpriteIndex();
 		this.paper_index.addSprite(12, 0.02); // move
@@ -322,7 +322,7 @@ class Game
 			}
 			else if (this.character == 1) // rock
 			{
-				
+				this.RockAttackBoxes.check_collisions(this.enemyList, this.mirrored);
 			}
 			else if (this.character == 2) // scissor
 			{
@@ -335,7 +335,7 @@ class Game
 			{
 				if (this.buffer == false)
 				{
-					console.log(this.buffer);
+					//console.log(this.buffer);
 					this.buffer = this.PaperAttackBoxes.check_collisions(this.enemyList, this.mirrored);
 					if (this.buffer == true)
 						setTimeout(this.buffer = false, 1000);
@@ -353,7 +353,7 @@ class Game
 			}
 			else if (this.character == 1) // rock
 			{
-				this.RockAttackBoxes.check_collisions(this.enemyList, this.mirrored);
+				
 			}
 			else if (this.character == 2) // scissor
 			{
