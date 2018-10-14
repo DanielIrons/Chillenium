@@ -98,10 +98,11 @@ class Paper_Player
 	}
 	
 	render()
-	{
+	{	
 		this.vel.y += this.acc.y * this.dt;
 		this.pos.y += this.vel.y;
 		this.acc.y+= this.weight;
+		
 		y = this.pos.y;
 
 		if (this.acc.y >0 && this.vel.y > this.weight*(1/20)){//fallspeed
