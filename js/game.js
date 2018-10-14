@@ -87,8 +87,8 @@ class Game
 		this.coords = new Point(105, 83);
 		this.frame = new Point();
 		
-		this.player_health_bar = new Sprite(this.gl, "img/playerHealth", this.vs, this.fs, {width: 22, height: 3});
-		this.bar_pos = new Point(85, 90);
+		this.player_health_bar = new Sprite(this.gl, "img/playerHealth.png", this.vs, this.fs, {width: 22, height: 3});
+		this.bar_pos = new Point(95, 100);
 		this.bar_frame = new Point();
 		
 		this.ScissorAttackBoxes = new PlayerAttackCircs(107, 81, 3, 109, 81, 3);
@@ -200,6 +200,7 @@ class Game
 			if(this.planeLand == 1){
 				this.plane.pos.x += 1*this.backSpeed;
 				this.plane.hitbox.x += 1*this.backSpeed;
+				this.plane.health_pos += this.backSpeed;
 			}
 			
 			if (this.grass_pos.x > 0)
@@ -241,6 +242,7 @@ class Game
 					this.plane.pos.y = 15;
 				}
 				this.plane.hitbox.x -= this.backSpeed;
+				this.plane.health_pos -= this.backSpeed;
 				
 			}
 			if (this.grass_pos.x < -128)
