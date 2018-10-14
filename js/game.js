@@ -115,8 +115,9 @@ class Game
 		this.scissor_minion_index = new SpriteIndex();
 		this.scissor_minion_index.addSprite(4, 0.005); // move
 		this.scissor_minion_index.addSprite(1, 0.001); // idle
-		this.scissor_minion = new Scissor_Minion(this.scissor_minion_index, this.gl, vs, fs);
-
+		this.scissor_minion1 = new Scissor_Minion(this.scissor_minion_index, this.gl, vs, fs);
+		this.scissor_minion2 = new Scissor_Minion(this.scissor_minion_index, this.gl, vs, fs);
+		/*
 		this.pebble_index = new SpriteIndex();
 		this.pebble_index.addSprite(4, 0.005); // move
 		this.pebble_index.addSprite(4, 0.003); // idle
@@ -127,7 +128,14 @@ class Game
 		this.boulder_index.addSprite(1, 0.001); // idle
 		this.boulder_index.addSprite(7, 0.01); // startup
 		this.boulder = new Boulder(this.boulder_index, this.gl, vs, fs);
-
+		*/
+		
+		//index list of current enemies in the scene:
+		this.enemyList = [
+			this.scissor_minion1,
+			this.scissor_minion2
+		];
+		
 		this.character = 0;
 	}
 	
@@ -247,6 +255,21 @@ class Game
 			this.character = 2;
 		}
 		
+		if ((Key.isDown(Key.O)) || (Key.isDown(Key.P)))
+		{
+			if (this.character == 0) // paper
+			{
+				this.PaperAttackBoxes.check_collisions(this.enemyList);
+			}
+			else if (this.character == 1) // rock
+			{
+				this.RockAttackBoxes.check_collisions(this.enemyList);
+			}
+			else if (this.character == 2) // scissor
+			{
+				this.ScissorAttackBoxes.check_collisions(this.enemyList);
+			}
+		}
 		
 		if (this.character == 0)
 		{
@@ -268,9 +291,11 @@ class Game
 		}
 		
 		
-		this.scissor_minion.update();
-		this.pebble.update();
-		this.boulder.update();
+		this.scissor_minion1.update();
+		this.scissor_minion2.update();
+		
+		//this.pebble.update();
+		//this.boulder.update();
 		this.title3.render(this.title_pos3, this.bg_frames, 1);
 		this.title2.render(this.title_pos2, this.bg_frames, 1);
 		this.title.render(this.title_pos, this.bg_frames, 1);

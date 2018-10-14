@@ -1,3 +1,4 @@
+
 class Scissor_Minion
 {
 	constructor(index, gl, vs, fs)

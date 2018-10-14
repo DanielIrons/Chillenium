@@ -18,6 +18,11 @@ class PlayerAttackBoxes
 		this.LeftRect = new Rect(x,y,w,h);
 		this.RightRect = new Rect(x2,y2,w2,h2);
 	}
+	
+	check_collisions(enemyList)
+	{
+		
+	}
 }
 
 class HitBox
