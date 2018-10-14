@@ -31,7 +31,18 @@ class PlayerAttackBoxes
 			{
 				this.Rect1 = this.LeftRect;
 			}
-			this.Rect2 = enemyList[i].hitbox;
+			this.Rect2 = enemyList[i].hitbox.hitbox;
+			/*
+			console.log(this.Rect1.x)
+			console.log(this.Rect1.y)
+			console.log(this.Rect1.w)
+			console.log(this.Rect1.h)
+			console.log(this.Rect2.x)
+			console.log(this.Rect2.y)
+			console.log(this.Rect2.w)
+			console.log(this.Rect2.h)
+			*/
+			console.log(this.Rect2)
 			
 			if ((this.Rect1.x < this.Rect2.x + this.Rect2.w) &&
 				(this.Rect1.x + this.Rect1.w > this.Rect2.x) &&
@@ -40,7 +51,7 @@ class PlayerAttackBoxes
 				{
 					// deal damage to enemy...
 					console.log("collision detected! ... \n");
-					enemyList.isAlive = false;
+					enemyList[i].isAlive = false;
 				}
 		}
 	}

@@ -86,7 +86,7 @@ class Pebble
 		this.index = index;
 		this.pos = new Point(140, 80);
 		this.frame = new Point();
-
+		this.isAlive = true;
 		
 		this.walk = new Sprite(gl, "img/pebble_move.png", vs, fs, {width:16, height:16});
 		this.idle = new Sprite(gl, "img/pebble_move.png", vs, fs, {width:16, height:16});
@@ -99,6 +99,8 @@ class Pebble
 	
 	update()
 	{	
+	if (this.isAlive == true)
+	{
 		this.curr = this.idle;
 		this.currNum = 1;
 		
@@ -116,6 +118,7 @@ class Pebble
 		}
 		
 		this.render();
+	}
 	}
 	
 	movement(num)
