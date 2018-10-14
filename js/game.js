@@ -370,7 +370,7 @@ class Game
 						
 						if (enemyList[i].isPaper)
 						{
-							this.bar_frame.y--;
+							//this.bar_frame.y--;
 						}
 						else if (enemyList[i].isRock)
 						{
@@ -378,18 +378,18 @@ class Game
 						}
 						else if (enemyList[i].isScissor)
 						{
-							this.bar_frame.y -= 4;
+							//this.bar_frame.y -= 4;
 						}
 					}
 					else if (this.character == 1) // rock
 					{
 						if (enemyList[i].isPaper)
 						{
-							this.bar_frame.y -= 4;
+							//this.bar_frame.y -= 4;
 						}
 						else if (enemyList[i].isRock)
 						{
-							this.bar_frame.y--;
+							//this.bar_frame.y--;
 						}
 						else if (enemyList[i].isScissor)
 						{
@@ -404,11 +404,11 @@ class Game
 						}
 						else if (enemyList[i].isRock)
 						{
-							this.bar_frame.y -= 4;
+							//this.bar_frame.y -= 4;
 						}
 						else if (enemyList[i].isScissor)
 						{
-							this.bar_frame.y--;
+							//this.bar_frame.y--;
 						}
 					}
 					
@@ -457,7 +457,7 @@ class Game
 	}
 	else 
 	{
-		this.gl.viewport(0, -545, this.canvasElem.width * 1.7, this.canvasElem.height * 1.7); // scales and moves the canvas
+		this.gl.viewport(0, -520, this.canvasElem.width * 1.7, this.canvasElem.height * 1.7); // scales and moves the canvas
 		this.gl.clear(this.gl.COLOR_BUFFER_BIT); // bg color
 		
 		// allows transparency
