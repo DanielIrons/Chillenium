@@ -1,14 +1,10 @@
 
 class Scissor_Minion
 {
-	constructor(index, gl, vs, fs, xValue)
+	constructor(index, gl, vs, fs, xVal)
 	{
 		this.index = index;
-<<<<<<< HEAD
-		this.pos = new Point(xValue, 88);
-=======
-		this.pos = new Point(130, 83);
->>>>>>> c7fd19d256c08fb12dd58a645092db30ad0fedf4
+		this.pos = new Point(xVal, 83);
 		this.frame = new Point();
 		this.isAlive = true;
 		this.isGone = false;
@@ -36,7 +32,7 @@ class Scissor_Minion
 		this.curr = this.idle;
 		this.currNum = 1;
 		
-		if(Math.abs(100-this.pos.x) < 384) { // instead of 35 you subtract 27 bc need from mid of character
+		if(Math.abs(100-this.pos.x) < 128) { // instead of 35 you subtract 27 bc need from mid of character
 			if(((73) < this.pos.x && this.mirrored == -1) || 127<=this.pos.x) {
 				this.movement(-1);
 			}
@@ -69,7 +65,6 @@ class Scissor_Minion
 	
 	deal_damage(points)
 	{
-		console.log("hit!");
 		this.health_frame.y += points;
 		if (this.health_frame.y >= 10)
 		{
@@ -129,10 +124,10 @@ class Scissor_Minion
 
 
 class Plane{
-	constructor(index, gl, vs, fs, xValue)
+	constructor(index, gl, vs, fs)
 	{
 		this.index = index;
-		this.pos = new Point(xValue, 20);
+		this.pos = new Point(200, 20);
 		this.frame = new Point();
 		this.idle = new Sprite(gl, "img/paper_airplane.png", vs, fs, {width:16, height:16});
 		this.pew = new Sprite(gl, "img/small_death.png", vs, fs, {width: 16, height: 16});
@@ -161,7 +156,7 @@ class Plane{
 		}
 		else
 		{
-			if(Math.abs(100-this.pos.x) < 384) 
+			if(Math.abs(100-this.pos.x) < 128) 
 			{ // instead of 35 you subtract 27 bc need from mid of character
 				if(((73) < this.pos.x && this.mirrored == -1) || 127<=this.pos.x)
 				{
@@ -199,7 +194,6 @@ class Plane{
 	
 	deal_damage(points)
 	{
-		console.log("hit!");
 		this.health_frame.y += points;
 		if (this.health_frame.y >= 10)
 		{
@@ -263,14 +257,10 @@ class Plane{
 
 class Pebble
 {
-	constructor(index, gl, vs, fs, xValue)
+	constructor(index, gl, vs, fs, xVal)
 	{
 		this.index = index;
-<<<<<<< HEAD
-		this.pos = new Point(xValue, 80);
-=======
-		this.pos = new Point(140, 78);
->>>>>>> c7fd19d256c08fb12dd58a645092db30ad0fedf4
+		this.pos = new Point(xVal, 78);
 		this.frame = new Point();
 		this.isAlive = true;
 		this.isGone = false;
@@ -300,7 +290,7 @@ class Pebble
 		this.curr = this.idle;
 		this.currNum = 1;
 		
-		if(Math.abs(100-this.pos.x) < 384) { // instead of 35 you subtract 27 bc need from mid of character
+		if(Math.abs(100-this.pos.x) < 128) { // instead of 35 you subtract 27 bc need from mid of character
 			if(((73) < this.pos.x && this.mirrored == -1) || 127<=this.pos.x)
 			{
 				this.movement(-1);
@@ -334,7 +324,6 @@ class Pebble
 	
 	deal_damage(points)
 	{
-		console.log("hit!");
 		this.health_frame.y += points;
 		if (this.health_frame.y >= 10)
 		{
@@ -393,10 +382,10 @@ class Pebble
 
 class Boulder
 {
-	constructor(index, gl, vs, fs, xValue)
+	constructor(index, gl, vs, fs, xVal)
 	{
 		this.index = index;
-		this.pos = new Point(xValue, 80);
+		this.pos = new Point(485, 80);
 		this.frame = new Point();
 		this.isAlive = true;
 		this.isGone = false;
@@ -427,7 +416,7 @@ class Boulder
 		this.curr = this.idle;
 		this.currNum = 1;
 		
-		if(Math.abs(100-this.pos.x) < 205) { // instead of 35 you subtract 27 bc need from mid of character
+		if(Math.abs(100-this.pos.x) < 384) { // instead of 35 you subtract 27 bc need from mid of character
 			if(((50) < this.pos.x && this.mirrored == -1) || 150<=this.pos.x)
 			{
 				// this.movement(0);
@@ -464,7 +453,6 @@ class Boulder
 	
 	deal_damage(points)
 	{
-		console.log("hit!");
 		this.health_frame.y += points;
 		if (this.health_frame.y >= 10)
 		{
@@ -483,14 +471,14 @@ class Boulder
 			this.curr = this.attack;
 			this.currNum = 0;
 			this.mirrored = -1;
-			this.pos.x-=0.5;
+			this.pos.x--;
 		}
 		if (num == 1) // move right	
 		{
 			this.curr = this.attack;
 			this.currNum = 0;
 			this.mirrored = 1;
-			this.pos.x+=0.5;
+			this.pos.x++;
 		}
 		this.hitbox.translate(this.pos.x + 8, this.pos.y + 8);
 		if (this.mirrored == -1)

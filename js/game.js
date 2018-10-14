@@ -4,10 +4,6 @@ function loop()
 	requestAnimationFrame(loop);
 }
 
-//index list of current enemies in the scene:
-var enemyList = [];
-var Gright;
-
 var Key = {
   _pressed: {},
 
@@ -33,6 +29,9 @@ var Key = {
     delete this._pressed[event.keyCode];
   }
 };
+
+		//index list of current enemies in the scene:
+var enemyList = [];
 
 class Game
 {
@@ -80,7 +79,7 @@ class Game
 		this.title3 = new Sprite(this.gl, "img/title_dark.png", this.vs, this.fs, {width: 128, height: 128});
 		this.title_pos3 = new Point(50, 0);
 		
-		this.pew = new Sprite(this.gl, "img/small_death.png", vs, fs, {width: 16, height: 16});
+		this.pew = new Sprite(this.gl, "img/small_death.png", this.vs, this.fs, {width: 16, height: 16});
 		this.pew_pos = new Point();
 		this.pew_frames = new Point(4,0);
 		
@@ -88,6 +87,9 @@ class Game
 		this.coords = new Point(105, 83);
 		this.frame = new Point();
 		
+		this.player_health_bar = new Sprite(this.gl, "img/playerHealth", this.vs, this.fs, {width: 22, height: 3});
+		this.bar_pos = new Point(85, 90);
+		this.bar_frame = new Point();
 		
 		this.ScissorAttackBoxes = new PlayerAttackCircs(107, 81, 3, 109, 81, 3);
 		this.PaperAttackBoxes = new PlayerAttackCircs(104, 85, 3, 112, 85, 3);
@@ -120,49 +122,28 @@ class Game
 		this.scissor_index.addSprite(3, 0.006); // attack
 		this.scissor_index.addSprite(6, 0.02); // switch
 		this.scissor_player = new Scissor_Player(this.scissor_index, this.gl, this.vs, this.fs, this.ScissorAttackBoxes, this.ScissorHitBox);
-
+		
 		this.scissor_minion_index = new SpriteIndex();
 		this.scissor_minion_index.addSprite(4, 0.005); // move
 		this.scissor_minion_index.addSprite(1, 0.001); // idle
-<<<<<<< HEAD
-=======
 		this.scissor_minion_index.addSprite(4, 0.01); // death
-		this.scissor_minion = new Scissor_Minion(this.scissor_minion_index, this.gl, vs, fs);
->>>>>>> c7fd19d256c08fb12dd58a645092db30ad0fedf4
 		
 		this.pebble_index = new SpriteIndex();
 		this.pebble_index.addSprite(4, 0.005); // move
 		this.pebble_index.addSprite(4, 0.003); // idle
-<<<<<<< HEAD
-		
-=======
 		this.pebble_index.addSprite(4, 0.01); // death
-		this.pebble = new Pebble(this.pebble_index, this.gl, vs, fs);
->>>>>>> c7fd19d256c08fb12dd58a645092db30ad0fedf4
-		
+		/*
 		this.boulder_index = new SpriteIndex();
 		this.boulder_index.addSprite(5, 0.006); // attack
 		this.boulder_index.addSprite(1, 0.001); // idle
 		this.boulder_index.addSprite(7, 0.01); // startup
-<<<<<<< HEAD
-		
-		this.plane_index = new SpriteIndex();
-		this.plane_index.addSprite(2, 0.002);
-		this.plane_index.addSprite(1, 0.001);
-		this.plane = new Plane(this.plane_index, this.gl, this.vs, this.fs);
-
-=======
 		this.boulder_index.addSprite(4, 0.01); // death
-		this.boulder = new Boulder(this.boulder_index, this.gl, vs, fs);
-
+		*/
 		this.plane_index = new SpriteIndex();
 		this.plane_index.addSprite(2, 0.002);
 		this.plane_index.addSprite(1, 0.001);
 		this.plane_index.addSprite(4, 0.01); // death
-		this.plane = new Plane(this.plane_index, this.gl, vs, fs);
-		
-		
->>>>>>> c7fd19d256c08fb12dd58a645092db30ad0fedf4
+		this.plane = new Plane(this.plane_index, this.gl, this.vs, this.fs);
 		
 		
 
@@ -182,16 +163,15 @@ class Game
 	
 	move(num)
 	{
-		if(this.right % 128 == 0)
-		{	
-			for (var i = 0; i < this.right / 128; i++) {
-				var boulder_temp = new Boulder(this.boulder_index, this.gl, this.vs, this.fs, this.right + Math.floor((Math.random()*200)+160));
-				var scissor_minion_temp = new Scissor_Minion(this.scissor_minion_index, this.gl, this.vs, this.fs, this.right + Math.floor((Math.random()*200)+160))
+		
+		if(this.right % 128 == 0) 
+		{
+			for(var i = 0; i < (this.right / 128); i++) {
+				var scissor_minion_temp = new Scissor_Minion(this.scissor_minion_index, this.gl, this.vs, this.fs, this.right + Math.floor((Math.random()*200)+160));
 				var pebble_temp = new Pebble(this.pebble_index, this.gl, this.vs, this.fs, this.right + Math.floor((Math.random()*200)+160));
 				enemyList.push(scissor_minion_temp, pebble_temp);
 			}
 		}
-
 		if (this.character == 0){
 		this.backSpeed = 1;
 		}
@@ -219,12 +199,12 @@ class Game
 			this.title_pos.x += 1*this.backSpeed;
 			this.title_pos3.x += 0.96*this.backSpeed;
 			this.title_pos2.x += 0.98*this.backSpeed;
+			
 			if(this.planeLand == 1){
 				this.plane.pos.x += 1*this.backSpeed;
 				this.plane.hitbox.x += 1*this.backSpeed;
-				this.plane.health_pos.x += this.backSpeed;
 			}
-
+			
 			if (this.grass_pos.x > 0)
 			{
 				this.grass_pos.x -= 128;
@@ -241,8 +221,7 @@ class Game
 			{
 				this.mount_pos.x -= 128;
 			}
-			this.right --;	
-			Gright = this.right;		
+			
 		}
 		if (num == 1)//Left
 		{
@@ -256,18 +235,17 @@ class Game
 			this.title_pos.x -= 1*this.backSpeed;
 			this.title_pos3.x -= 0.96*this.backSpeed;
 			this.title_pos2.x -= 0.98*this.backSpeed;
-			if(this.planeLand == 1){
-
+			
+			if(this.planeLand == 1)
+			{
 				this.plane.pos.x -= 1*this.backSpeed;
 				if (this.plane.pos.x < -16){
 					this.plane.pos.x = 280;
 					this.plane.pos.y = 15;
 				}
 				this.plane.hitbox.x -= this.backSpeed;
-				this.plane.health_pos.x -= this.backSpeed;
 				
 			}
-
 			if (this.grass_pos.x < -128)
 			{
 				this.grass_pos.x += 128;
@@ -284,15 +262,13 @@ class Game
 			{
 				this.mount_pos.x += 128;
 			}
-			this.right ++;
-			Gright = this.right;
-			var backSpeed = this.backSpeed;
+			this.right++;
+			
 			enemyList.forEach(function(element) {
-				if(element.pos.x > 127)
-				{
+				if(element.pos.x > 127) {
 					element.pos.x -= 1;
 				}
-			})
+			});
 		}
 	
 	}
@@ -300,6 +276,7 @@ class Game
 	
 	update()
 	{
+		
 		if (this.character == 0){
 		this.backSpeed = 1;
 		}
@@ -317,7 +294,7 @@ class Game
 		this.gl.enable(this.gl.BLEND);
 		this.gl.blendFunc(this.gl.SRC_ALPHA, this.gl.ONE_MINUS_SRC_ALPHA); 
 	
-
+	
 		if(this.plane.update())
 		{
 			this.planeLand = 1;
@@ -332,7 +309,7 @@ class Game
 		this.trees.render(this.trees_pos, this.bg_frames, 1);
 		this.hills.render(this.hills_pos, this.bg_frames, 1);
 		this.grass_cont.render(this.grass_cont_pos, this.bg_frames, 1);
-		var b=this.plane.update();
+		// var b=this.plane.update();
 		
 		
 		
@@ -364,30 +341,16 @@ class Game
 			}
 			else if (this.character == 2) // scissor
 			{
-<<<<<<< HEAD
-				this.ScissorAttackBoxes.check_collisions(enemyList, this.mirrored);
-=======
 			
->>>>>>> c7fd19d256c08fb12dd58a645092db30ad0fedf4
 			}
 		}
 		if (Key.isDown(Key.O))
 		{
 			if (this.character == 0) // paper
 			{
-<<<<<<< HEAD
 				this.PaperAttackBoxes.check_collisions(enemyList, this.mirrored);
-=======
-				if (this.buffer == false)
-				{
-					//console.log(this.buffer);
-					this.buffer = this.PaperAttackBoxes.check_collisions(this.enemyList, this.mirrored);
-					if (this.buffer == true)
-						setTimeout(this.buffer = false, 1000);
-				}
-	
-				
->>>>>>> c7fd19d256c08fb12dd58a645092db30ad0fedf4
+			
+
 				if (this.mirrored == false)
 				{
 					this.move(1);
@@ -403,10 +366,9 @@ class Game
 			}
 			else if (this.character == 2) // scissor
 			{
-				this.ScissorAttackBoxes.check_collisions(this.enemyList, this.mirrored);
+				this.ScissorAttackBoxes.check_collisions(enemyList, this.mirrored);
 			}
 		}
-		
 		
 		if (this.character == 0)
 		{
@@ -435,15 +397,16 @@ class Game
 		}
 		
 		enemyList.forEach(function(element) {
-			element.update();
+			element.update()
 		});
 		this.title3.render(this.title_pos3, this.bg_frames, 1);
 		this.title2.render(this.title_pos2, this.bg_frames, 1);
 		this.title.render(this.title_pos, this.bg_frames, 1);
 		this.grass.render(this.grass_pos, this.bg_frames, 1);
 				
-
+		this.plane.render();
 		
+		this.player_health_bar.render(this.bar_pos, this.bar_frame, 1);
 		this.gl.flush();
 	}
 }

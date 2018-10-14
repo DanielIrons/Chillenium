@@ -42,30 +42,16 @@ class PlayerAttackCircs
 		{
 			if (enemyList[i].isAlive == true)
 			{
-<<<<<<< HEAD
-				this.Rect1 = this.LeftRect;
-			}
-			this.Rect2 = enemyList[i].hitbox.hitbox;
-			
-			if ((this.Rect1.x < this.Rect2.x + this.Rect2.w) &&
-				(this.Rect1.x + this.Rect1.w > this.Rect2.x) &&
-				(this.Rect1.y < this.Rect2.y + this.Rect2.h) &&
-				(this.Rect1.y + this.Rect1.h > this.Rect2.y))
-				{
-					// deal damage to enemy...
-
-					enemyList[i].isAlive = false;
-=======
 				if (mirrored == false)
 				{
 					this.Circ1 = this.RightCirc;
-					console.log(this.Circ1);
+
 				}
 				else 
 				{
 					this.Circ1 = this.LeftCirc;
 					this.Circ1 = this.RightCirc;
-					console.log(this.Circ1);
+
 				}
 				this.Circ2 = enemyList[i].hitbox.hitbox;
 				
@@ -79,7 +65,6 @@ class PlayerAttackCircs
 					//console.log("collision detected! ... \n");
 					enemyList[i].deal_damage(2);
 					return true;
->>>>>>> c7fd19d256c08fb12dd58a645092db30ad0fedf4
 				}
 			}
 		}
