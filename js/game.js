@@ -144,7 +144,6 @@ class Game
 		this.plane_index.addSprite(2, 0.002);
 		this.plane_index.addSprite(1, 0.001);
 		this.plane_index.addSprite(4, 0.01); // death
-		this.plane = new Plane(this.plane_index, this.gl, this.vs, this.fs);
 		
 		
 
@@ -170,10 +169,23 @@ class Game
 		{
 			if(valuesCheck.indexOf(this.right) == -1) 
 			{
-				for(var i = 0; i < 3; i++) {
-					var scissor_minion_temp = new Scissor_Minion(this.scissor_minion_index, this.gl, this.vs, this.fs, this.right + Math.floor((Math.random()*200)+160));
-					var pebble_temp = new Pebble(this.pebble_index, this.gl, this.vs, this.fs, this.right + Math.floor((Math.random()*200)+160));
-					enemyList.push(scissor_minion_temp, pebble_temp);
+				for(var i = 0; i < 1; i++) {
+					
+					var x = Math.floor(Math.random() * 2 + 0);
+					console.log(x);
+					if (x == 0)
+					{
+						var minion = new Scissor_Minion(this.scissor_minion_index, this.gl, this.vs, this.fs, this.right + Math.floor((Math.random()*200)+160));
+					}
+					else if (x==1)
+					{
+						var minion = new Pebble(this.pebble_index, this.gl, this.vs, this.fs, this.right + Math.floor((Math.random()*200)+160));
+					}
+					else if (x==2)
+					{
+						// paper enemy
+					}
+					enemyList.push(minion);
 				}
 			}
 			valuesCheck.push(this.right);
@@ -206,11 +218,6 @@ class Game
 			this.title_pos3.x += 0.96*this.backSpeed;
 			this.title_pos2.x += 0.98*this.backSpeed;
 			
-			if(this.planeLand == 1){
-				this.plane.pos.x += 1*this.backSpeed;
-				this.plane.hitbox.x += 1*this.backSpeed;
-				this.plane.health_pos += this.backSpeed;
-			}
 			
 			if (this.grass_pos.x > 0)
 			{
@@ -243,17 +250,6 @@ class Game
 			this.title_pos3.x -= 0.96*this.backSpeed;
 			this.title_pos2.x -= 0.98*this.backSpeed;
 			
-			if(this.planeLand == 1)
-			{
-				this.plane.pos.x -= 1*this.backSpeed;
-				if (this.plane.pos.x < -16){
-					this.plane.pos.x = 280;
-					this.plane.pos.y = 15;
-				}
-				this.plane.hitbox.x -= this.backSpeed;
-				this.plane.health_pos -= this.backSpeed;
-				
-			}
 			if (this.grass_pos.x < -128)
 			{
 				this.grass_pos.x += 128;
@@ -308,12 +304,6 @@ class Game
 		this.gl.enable(this.gl.BLEND);
 		this.gl.blendFunc(this.gl.SRC_ALPHA, this.gl.ONE_MINUS_SRC_ALPHA); 
 	
-	
-		if(this.plane.update())
-		{
-			this.planeLand = 1;
-		}
-		
 		
 		if (Key.isDown(Key.LEFT)) this.move(0);
 		if (Key.isDown(Key.RIGHT)) this.move(1);
@@ -323,8 +313,7 @@ class Game
 		this.trees.render(this.trees_pos, this.bg_frames, 1);
 		this.hills.render(this.hills_pos, this.bg_frames, 1);
 		this.grass_cont.render(this.grass_cont_pos, this.bg_frames, 1);
-		// var b=this.plane.update();
-		
+
 		
 		
 		if (Key.isDown(Key.J))
@@ -384,6 +373,40 @@ class Game
 			}
 		}
 		
+		// collisions
+		for(var i = 0; i < enemyList.length; i++)
+		{
+			if (enemyList[i].isAlive == true)
+			{
+				if (this.character == 0)
+				{
+					this.Circ1 = this.PaperHitBox.hitbox;
+				}
+				if (this.character == 1)
+				{
+					this.Circ1 = this.RockHitBox.hitbox;
+				}
+				if (this.character == 2)
+				{
+					this.Circ1 = this.ScissorHitBox.hitbox;
+				}
+				
+				this.Circ2 = enemyList[i].hitbox.hitbox;
+				
+				this.dx = this.Circ1.x - this.Circ2.x;
+				this.dy = this.Circ1.y - this.Circ2.y;
+				this.dist = Math.sqrt(this.dx * this.dx + this.dy + this.dy);
+				
+				if (this.dist < this.Circ1.r + this.Circ2.r)
+				{
+					// deal damage to enemy...
+					//console.log("collision detected! ... \n");
+					this.bar_frame.y++;
+				}
+			}
+		}	
+		
+		
 		if (this.character == 0)
 		{
 			this.paper_player.update();
@@ -417,8 +440,6 @@ class Game
 		this.title2.render(this.title_pos2, this.bg_frames, 1);
 		this.title.render(this.title_pos, this.bg_frames, 1);
 		this.grass.render(this.grass_pos, this.bg_frames, 1);
-				
-		this.plane.render();
 		
 		this.player_health_bar.render(this.bar_pos, this.bar_frame, 1);
 		this.gl.flush();
