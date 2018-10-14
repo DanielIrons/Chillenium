@@ -19,13 +19,34 @@ class PlayerAttackBoxes
 		this.RightRect = new Rect(x2,y2,w2,h2);
 	}
 	
-	check_collisions(enemyList)
+	check_collisions(enemyList, mirrored)
 	{
-		
+		for(var i = 0; i < enemyList.length; i++)
+		{
+			if (mirrored == false)
+			{
+				this.Rect1 = this.RightRect;
+			}
+			else 
+			{
+				this.Rect1 = this.LeftRect;
+			}
+			this.Rect2 = enemyList[i].hitbox;
+			
+			if ((this.Rect1.x < this.Rect2.x + this.Rect2.w) &&
+				(this.Rect1.x + this.Rect1.w > this.Rect2.x) &&
+				(this.Rect1.y < this.Rect2.y + this.Rect2.h) &&
+				(this.Rect1.y + this.Rect1.h > this.Rect2.y))
+				{
+					// deal damage to enemy...
+					console.log("collision detected! ... \n");
+					enemyList.isAlive = false;
+				}
+		}
 	}
 }
 
-class HitBox
+class Hit_Box
 {
 	constructor (x,y,w,h)
 	{
