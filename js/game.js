@@ -32,6 +32,7 @@ var Key = {
 
 		//index list of current enemies in the scene:
 var enemyList = [];
+var valuesCheck = [];
 
 class Game
 {
@@ -160,14 +161,19 @@ class Game
 	
 	move(num)
 	{
+		this.valuesCheck = [];
 		
-		if(this.right % 128 == 0) 
+		if(this.right % 128 == 0 && this.right !=0) 
 		{
-			for(var i = 0; i < (this.right / 128); i++) {
-				var scissor_minion_temp = new Scissor_Minion(this.scissor_minion_index, this.gl, this.vs, this.fs, this.right + Math.floor((Math.random()*200)+160));
-				var pebble_temp = new Pebble(this.pebble_index, this.gl, this.vs, this.fs, this.right + Math.floor((Math.random()*200)+160));
-				enemyList.push(scissor_minion_temp, pebble_temp);
+			if(valuesCheck.indexOf(this.right) == -1) 
+			{
+				for(var i = 0; i < 3; i++) {
+					var scissor_minion_temp = new Scissor_Minion(this.scissor_minion_index, this.gl, this.vs, this.fs, this.right + Math.floor((Math.random()*200)+160));
+					var pebble_temp = new Pebble(this.pebble_index, this.gl, this.vs, this.fs, this.right + Math.floor((Math.random()*200)+160));
+					enemyList.push(scissor_minion_temp, pebble_temp);
+				}
 			}
+			valuesCheck.push(this.right);
 		}
 		if (this.character == 0){
 		this.backSpeed = 1;
@@ -273,7 +279,13 @@ class Game
 	
 	update()
 	{
-		
+		enemyList.forEach(function(element) {
+			if(element.isAlive == false)
+			{
+				enemyList.splice(enemyList.indexOf(element), 1);
+			}
+		});
+
 		if (this.character == 0){
 		this.backSpeed = 1;
 		}
