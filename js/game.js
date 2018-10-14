@@ -106,9 +106,9 @@ class Game
 		this.PaperAttackBoxes = new PlayerAttackCircs(104, 85, 3, 112, 85, 3);
 		this.RockAttackBoxes = new PlayerAttackCircs(108, 88, 8, 108, 88, 8);
 		
-		this.PaperHitBox = new Hit_Circ(108, 85, 4);
-		this.RockHitBox = new Hit_Circ(108, 88, 7);
-		this.ScissorHitBox = new Hit_Circ(108, 81, 2);
+		this.PaperHitBox = new Hit_Circ(112, 85, 5);
+		this.RockHitBox = new Hit_Circ(112, 88, 7);
+		this.ScissorHitBox = new Hit_Circ(112, 81, 5);
 
 		this.paper_index = new SpriteIndex();
 		this.paper_index.addSprite(12, 0.02); // move
@@ -298,13 +298,13 @@ class Game
 		});
 
 		if (this.character == 0){
-		this.backSpeed = 1;
+		this.backSpeed = 1.5;
 		}
 		if (this.character == 1){
-		this.backSpeed = 0.6;
+		this.backSpeed = 1.5;
 		}
 		if (this.character == 2){
-		this.backSpeed = 1.35;
+		this.backSpeed = 1.5;
 		}
 
 		this.gl.viewport(0, -545, this.canvasElem.width * 1.7, this.canvasElem.height * 1.7); // scales and moves the canvas
@@ -378,9 +378,10 @@ class Game
 						}
 						else if (enemyList[i].isRock)
 						{
+							this.paper_player.animate();
 							enemyList[i].deal_damage(3);
 						}
-						else if (eneymyList[i].isScissor)
+						else if (enemyList[i].isScissor)
 						{
 							this.bar_frame.y--;
 						}
@@ -410,7 +411,7 @@ class Game
 						{
 							this.bar_frame.y--;
 						}
-						else if (eneymyList[i].isScissor)
+						else if (enemyList[i].isScissor)
 						{
 							this.bar_frame.y--;
 						}

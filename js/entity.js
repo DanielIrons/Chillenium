@@ -86,17 +86,14 @@ class Paper_Player
 			this.currNum = 0;
 			this.mirrored = 1;
 		}
-		if (num == 4) // special
-		{
-			this.curr = this.special;
-			this.currNum = 1;
-		}
-		if (num == 5)
-		{
-			this.curr = this.attack;
-			this.currNum = 3;
-		}
 	}
+	
+	animate()
+	{
+		this.curr = this.attack;
+		this.currNum = 3;
+	}
+	
 	
 	render()
 	{	
@@ -204,17 +201,8 @@ class Scissor_Player
 			this.currNum = 0;
 			this.mirrored = 1;
 		}
-		if (num == 4) // special
-		{
-			this.curr = this.special;
-			this.currNum = 1;
-		}
-		if(num == 5) // attack
-		{
-			this.curr = this.attack;
-			this.currNum = 3
-		}
 	}
+	
 	
 	render()
 	{
