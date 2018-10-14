@@ -102,6 +102,10 @@ class Game
 		this.bar_pos = new Point(95, 100);
 		this.bar_frame = new Point();
 		
+		this.end_index = new Sprite(this.gl, "img/end.png", this.vs, this.fs, {width: 128, height: 128});
+		this.end_game_pos = new Point(50, 0);
+		this.end_frame = new Point();
+		
 		this.ScissorAttackBoxes = new PlayerAttackCircs(107, 81, 3, 109, 81, 3);
 		this.PaperAttackBoxes = new PlayerAttackCircs(104, 85, 3, 112, 85, 3);
 		this.RockAttackBoxes = new PlayerAttackCircs(108, 88, 8, 108, 88, 8);
@@ -180,8 +184,7 @@ class Game
 			{
 				for(var i = 0; i < 1; i++) {
 					
-					var x = Math.floor(Math.random() * 2 + 0);
-					console.log(x);
+					var x = Math.floor(Math.random() * 3 + 0);
 					if (x == 0)
 					{
 						var minion = new Scissor_Minion(this.scissor_minion_index, this.gl, this.vs, this.fs, this.right + Math.floor((Math.random()*200)+160));
@@ -192,7 +195,7 @@ class Game
 					}
 					else if (x==2)
 					{
-						var minion = new Plane(this.plane_index, this.gl, this.vs, this.fs, this.right + Math.floor((Math.random()*200)+160));
+						var minion = new Paper_Minion(this.plane_index, this.gl, this.vs, this.fs, this.right + Math.floor((Math.random()*200)+160));
 					}
 					enemyList.push(minion);
 				}
@@ -290,6 +293,9 @@ class Game
 	
 	update()
 	{
+		console.log(this.bar_frame.y);
+	if (this.bar_frame.y >= -20)
+	{
 		var right = this.right;
 		enemyList.forEach(function(element) {
 			if(element.isAlive == false)
@@ -368,19 +374,18 @@ class Game
 						}
 						else if (enemyList[i].isRock)
 						{
-							this.paper_player.animate();
 							enemyList[i].deal_damage(10);
 						}
 						else if (enemyList[i].isScissor)
 						{
-							this.bar_frame.y--;
+							this.bar_frame.y -= 4;
 						}
 					}
 					else if (this.character == 1) // rock
 					{
 						if (enemyList[i].isPaper)
 						{
-							this.bar_frame.y--;
+							this.bar_frame.y -= 4;
 						}
 						else if (enemyList[i].isRock)
 						{
@@ -399,7 +404,7 @@ class Game
 						}
 						else if (enemyList[i].isRock)
 						{
-							this.bar_frame.y--;
+							this.bar_frame.y -= 4;
 						}
 						else if (enemyList[i].isScissor)
 						{
@@ -449,5 +454,23 @@ class Game
 
 		this.player_health_bar.render(this.bar_pos, this.bar_frame, 1);
 		this.gl.flush();
+	}
+	else 
+	{
+		this.gl.viewport(0, -545, this.canvasElem.width * 1.7, this.canvasElem.height * 1.7); // scales and moves the canvas
+		this.gl.clear(this.gl.COLOR_BUFFER_BIT); // bg color
+		
+		// allows transparency
+		this.gl.enable(this.gl.BLEND);
+		this.gl.blendFunc(this.gl.SRC_ALPHA, this.gl.ONE_MINUS_SRC_ALPHA); 
+		this.sky.render(this.sky_pos, this.bg_frames, 1);
+		this.mountains.render(this.mount_pos, this.bg_frames, 1);
+		this.trees.render(this.trees_pos, this.bg_frames, 1);
+		this.hills.render(this.hills_pos, this.bg_frames, 1);
+		this.end_index.render(this.end_game_pos, this.end_frame, 1);
+		this.grass.render(this.grass_pos, this.bg_frames, 1);
+		
+	}
+	
 	}
 }
