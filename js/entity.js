@@ -10,13 +10,13 @@ class SpriteIndex
 		this.s_f_s.push([frame, speed]);
 	}
 }
-
+var y = 80;
 class Paper_Player
 {
 	constructor(index, gl, vs, fs)
 	{
 		this.index = index;
-		this.pos = new Point(100, 80);
+		this.pos = new Point(100, y);
 		this.vel = new Point();
 		this.acc = new Point();
 		this.acc.y = 0.01;
@@ -96,6 +96,8 @@ class Paper_Player
 		this.vel.y += this.acc.y * this.dt;
 		this.pos.y += this.vel.y;
 		this.acc.y+= this.weight;
+		y = this.pos.y;
+		console.log(y);1
 		if (this.acc.y >0 && this.vel.y > this.weight*(1/20)){//fallspeed
 			this.vel.y = this.weight*(1/20);
 		}
@@ -123,7 +125,7 @@ class Scissor_Player
 	constructor(index, gl, vs, fs)
 	{
 		this.index = index;
-		this.pos = new Point(100, 80);
+		this.pos = new Point(100, y);
 		this.vel = new Point();
 		this.acc = new Point();
 		this.acc.y = 0.01;
@@ -204,7 +206,8 @@ class Scissor_Player
 		this.vel.y += this.acc.y * this.dt;
 		this.pos.y += this.vel.y;
 		this.acc.y+= this.weight;
-		
+		y = this.pos.y;
+		console.log(y);
 		if (this.acc.y >0 && this.vel.y > this.weight){
 			this.vel.y = this.weight;
 		}
@@ -233,7 +236,8 @@ class Rock_Player
 	constructor(index, gl, vs, fs)
 	{
 		this.index = index;
-		this.pos = new Point(100, 80);
+
+		this.pos = new Point(100, y);
 		this.vel = new Point();
 		this.acc = new Point();
 		this.acc.y = 0.01;
@@ -266,6 +270,7 @@ class Rock_Player
 		if (Key.isDown(Key.RIGHT)) this.movement(3);
 		if (Key.isDown(Key.P)) this.movement(4);
 		if (Key.isDown(Key.O)) this.movement(5);
+		
 		if ((Key.isDown(Key.J)) || (Key.isDown(Key.K)) || (Key.isDown(Key.L)))
 		{
 			this.curr = this.trans;
@@ -318,7 +323,8 @@ class Rock_Player
 		this.vel.y += this.acc.y * this.dt;
 		this.pos.y += this.vel.y;
 		this.acc.y+= this.weight;
-
+		y = this.pos.y;
+		console.log(y);
 		if (this.pos.y >= 80)
 		{
 			this.pos.y = 80;

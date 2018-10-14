@@ -237,14 +237,20 @@ class Game
 		if (this.character == 0)
 		{
 			this.paper_player.update();
+			this.rock_player.pos.y = this.paper_player.pos.y;
+			this.scissor_player.pos.y = this.paper_player.pos.y;
 		}
 		else if (this.character == 1)
 		{
 			this.rock_player.update();
+			this.scissor_player.pos.y = this.rock_player.pos.y;
+			this.paper_player.pos.y = this.rock_player.pos.y
 		}
 		else if (this.character == 2)
 		{
 			this.scissor_player.update();
+			this.rock_player.pos.y = this.scissor_player.pos.y;
+			this.paper_player.pos.y = this.scissor_player.pos.y;
 		}
 		
 		this.scissor_minion.update();
