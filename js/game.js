@@ -99,7 +99,7 @@ class Game
 		
 		this.rock_index = new SpriteIndex();
 		this.rock_index.addSprite(4, 0.008); // move
-		this.rock_index.addSprite(4, 0.02); // special
+		this.rock_index.addSprite(4, 0.002); // special
 		this.rock_index.addSprite(2, 0.003); // idle
 		this.rock_index.addSprite(5, 0.02); // attack
 		this.rock_index.addSprite(6, 0.02); // switch
@@ -167,6 +167,9 @@ class Game
 		}
 		if (this.character == 2){
 		this.backSpeed = 1.35;
+		}
+		if(this.rock_player.currNum == 1 && this.character == 1){
+			this.backSpeed = 0.1
 		}
 		
 		
